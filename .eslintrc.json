@@ -1,5 +1,5 @@
 {
-  "extends": ["next", "plugin:react/recommended"],
+  "extends": ["next", "plugin:react/recommended", "next/core-web-vitals"],
   "plugins": ["react"],
   "rules": {
     "react/react-in-jsx-scope": "off",

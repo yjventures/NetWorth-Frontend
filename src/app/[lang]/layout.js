@@ -1,17 +1,17 @@
-import { Inter } from 'next/font/google'
-import '@/styles/globals.scss'
 import ReduxProvider from '@/lib/redux/redux-provider'
+import '@/styles/globals.scss'
+import { Poppins } from 'next/font/google'
 
-const inter = Inter({ subsets: ['latin'] })
+const poppins = Poppins({ subsets: ['latin'], weight: ['200', '300', '400', '500', '700'] })
 
 export const metadata = {
-  title: 'NetWorth',
+  title: 'NetWorth'
 }
 
 export default function RootLayout({ children }) {
   return (
     <html>
-      <body className={inter.className} suppressHydrationWarning>
+      <body className={poppins.className} suppressHydrationWarning>
         <ReduxProvider>{children}</ReduxProvider>
       </body>
     </html>
