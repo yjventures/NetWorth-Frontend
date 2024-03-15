@@ -6,6 +6,7 @@ import sliderImage2_2 from '@/assets/images/homepage/secondSlide2.png'
 import sliderImage3 from '@/assets/images/homepage/thirdSlide.png'
 import { Button } from '@/components/ui/button'
 import { Img } from '@/components/ui/img'
+import LLink from '@/components/ui/llink'
 import { Pagination } from 'swiper/modules'
 import { Swiper, SwiperSlide } from 'swiper/react'
 
@@ -19,7 +20,7 @@ export default function Home() {
         }}
         spaceBetween={100}
         modules={[Pagination]}
-        className='h-dvh'
+        className='h-[90dvh]'
       >
         <SwiperSlide>
           <div className='flex flex-col gap-20 items-center justify-center h-full'>
@@ -49,7 +50,9 @@ export default function Home() {
               </p>
             </div>
             <div className='w-full space-y-5'>
-              <Button className='w-full h-14 rounded-2xl'>Sign up with email</Button>
+              <LLink href='/signup'>
+                <Button className='w-full h-14 rounded-2xl'>Sign up with email</Button>
+              </LLink>
               <Button className='w-full h-14 rounded-2xl' variant='tartiary'>
                 Scan Business Card
               </Button>
