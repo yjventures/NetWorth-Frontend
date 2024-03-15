@@ -1,6 +1,8 @@
 import ReduxProvider from '@/lib/redux/redux-provider'
 import '@/styles/globals.scss'
 import { Poppins } from 'next/font/google'
+import 'swiper/css'
+import 'swiper/css/pagination'
 
 const poppins = Poppins({ subsets: ['latin'], weight: ['200', '300', '400', '500', '700'] })
 
