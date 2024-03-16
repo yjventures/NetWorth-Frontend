@@ -8,7 +8,7 @@ import { ChevronLeft } from 'lucide-react'
 import { useSearchParams } from 'next/navigation'
 import { Fragment, useState } from 'react'
 
-export default function SignUpEmailVerifyPage() {
+export default function LoginVerifyPage() {
   const params = useSearchParams()
   const email = params.has('email') && params.get('email')
   const [otp, setotp] = useState('')
@@ -23,7 +23,7 @@ export default function SignUpEmailVerifyPage() {
 
       <div className='flex flex-col items-center justify-center mt-20 rounded-3xl bg-gray-100 border border-gray-200 shadow-sm px-6 py-10'>
         <Typography variant='h3' className='font-medium'>
-          Verify your email
+          Verify Login
         </Typography>
         <p className='text-muted-foreground text-sm mt-3'>We Have Sent Code To Your email</p>
 
