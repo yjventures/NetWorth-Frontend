@@ -4,17 +4,36 @@ import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import LLink from '@/components/ui/llink'
 import Typography from '@/components/ui/typography'
+import usePush from '@/hooks/usePush'
+import { useSignUpMutation } from '@/redux/features/authApi'
+import { rtkErrorMesage } from '@/utils/error/errorMessage'
 import { ChevronLeft, Lock, Mail, User } from 'lucide-react'
+import { useEffect } from 'react'
 import { useForm } from 'react-hook-form'
+import toast from 'react-hot-toast'
 
 export default function SignupPage() {
+  const push = usePush()
   const {
     register,
     handleSubmit,
     formState: { errors }
   } = useForm()
 
-  const onSubmit = data => console.log(data)
+  const [signUp, { isSuccess, isError, error }] = useSignUpMutation()
+
+  const onSubmit = data => {
+    signUp(data)
+  }
+
+  useEffect(() => {
+    if (isSuccess) {
+      toast.success('Signup successfully!')
+      push(`/signup/verify?email=${data.email}`)
+    }
+    if (isError) toast.error(rtkErrorMesage(error))
+  }, [isSuccess, isError, error, push])
+
   return (
     <div className='py-10 container'>
       <LLink href='/'>

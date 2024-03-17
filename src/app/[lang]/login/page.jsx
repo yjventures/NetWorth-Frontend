@@ -7,15 +7,23 @@ import LLink from '@/components/ui/llink'
 import { Switch } from '@/components/ui/switch'
 import Typography from '@/components/ui/typography'
 import { ChevronLeft, Lock, Mail } from 'lucide-react'
-import { useState } from 'react'
+import { useSearchParams } from 'next/navigation'
+import { useEffect, useState } from 'react'
 import { useForm } from 'react-hook-form'
 
 export default function LoginPage() {
+  const params = useSearchParams()
+  const email = params.has('email') && params.get('email')
   const {
     register,
     handleSubmit,
+    setValue,
     formState: { errors }
   } = useForm()
+
+  useEffect(() => {
+    if (email) setValue('email', email)
+  }, [email, setValue])
 
   const [rememberMe, setrememberMe] = useState(false)
 

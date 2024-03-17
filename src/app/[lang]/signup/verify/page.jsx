@@ -4,15 +4,30 @@ import { Button } from '@/components/ui/button'
 import { InputOTP, InputOTPGroup, InputOTPSlot } from '@/components/ui/input-otp'
 import LLink from '@/components/ui/llink'
 import Typography from '@/components/ui/typography'
+import usePush from '@/hooks/usePush'
+import { useVerifySignupMutation } from '@/redux/features/authApi'
+import { rtkErrorMesage } from '@/utils/error/errorMessage'
 import { ChevronLeft } from 'lucide-react'
 import { useSearchParams } from 'next/navigation'
-import { Fragment, useState } from 'react'
+import { Fragment, useEffect, useState } from 'react'
+import toast from 'react-hot-toast'
 
 export default function SignUpEmailVerifyPage() {
+  const push = usePush()
   const params = useSearchParams()
   const email = params.has('email') && params.get('email')
   const [otp, setotp] = useState('')
-  console.log(otp)
+
+  const [verifySignUp, { isSuccess, isError, error }] = useVerifySignupMutation()
+
+  useEffect(() => {
+    if (isSuccess) {
+      toast.success('Email verified successfully!')
+      push(`/login?email=${email}`)
+    }
+    if (isError) toast.error(rtkErrorMesage(error))
+  }, [isSuccess, isError, error, email, push])
+
   return (
     <div className='py-10 container'>
       <LLink href='/'>
@@ -45,7 +60,9 @@ export default function SignUpEmailVerifyPage() {
           )}
         />
 
-        <Button className='w-full rounded-2xl mt-12 mb-3'>Verify</Button>
+        <Button className='w-full rounded-2xl mt-12 mb-3' onClick={() => verifySignUp({ email, otp })}>
+          Verify
+        </Button>
         <Button className='w-full rounded-2xl' variant='tartiary'>
           Send Again
         </Button>
