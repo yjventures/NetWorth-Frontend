@@ -17,6 +17,7 @@ export default function SignupPage() {
   const {
     register,
     handleSubmit,
+    getValues,
     formState: { errors }
   } = useForm()
 
@@ -29,10 +30,10 @@ export default function SignupPage() {
   useEffect(() => {
     if (isSuccess) {
       toast.success('Signup successfully!')
-      push(`/signup/verify?email=${data.email}`)
+      push(`/signup/verify?email=${getValues('email')}`)
     }
     if (isError) toast.error(rtkErrorMesage(error))
-  }, [isSuccess, isError, error, push])
+  }, [isSuccess, isError, error, push, getValues])
 
   return (
     <div className='py-10 container'>

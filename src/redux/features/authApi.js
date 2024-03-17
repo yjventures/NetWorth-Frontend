@@ -15,8 +15,22 @@ const authApi = api.injectEndpoints({
         method: 'POST',
         body: payload
       })
+    }),
+    login: build.mutation({
+      query: payload => ({
+        url: '/user/login',
+        method: 'POST',
+        body: payload
+      })
+    }),
+    verifyLogin: build.mutation({
+      query: payload => ({
+        url: '/user/varify-login',
+        method: 'POST',
+        body: payload
+      })
     })
   })
 })
 
-export const { useSignUpMutation, useVerifySignupMutation } = authApi
+export const { useSignUpMutation, useVerifySignupMutation, useLoginMutation, useVerifyLoginMutation } = authApi

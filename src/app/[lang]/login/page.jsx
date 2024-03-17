@@ -6,18 +6,24 @@ import { Label } from '@/components/ui/label'
 import LLink from '@/components/ui/llink'
 import { Switch } from '@/components/ui/switch'
 import Typography from '@/components/ui/typography'
+import usePush from '@/hooks/usePush'
+import { useLoginMutation } from '@/redux/features/authApi'
+import { rtkErrorMesage } from '@/utils/error/errorMessage'
 import { ChevronLeft, Lock, Mail } from 'lucide-react'
 import { useSearchParams } from 'next/navigation'
 import { useEffect, useState } from 'react'
 import { useForm } from 'react-hook-form'
+import toast from 'react-hot-toast'
 
 export default function LoginPage() {
+  const push = usePush()
   const params = useSearchParams()
   const email = params.has('email') && params.get('email')
   const {
     register,
     handleSubmit,
     setValue,
+    getValues,
     formState: { errors }
   } = useForm()
 
@@ -27,9 +33,20 @@ export default function LoginPage() {
 
   const [rememberMe, setrememberMe] = useState(false)
 
+  const [login, { isSuccess, isError, error }] = useLoginMutation()
+
   const onSubmit = data => {
-    console.log(data, rememberMe)
+    login(data)
   }
+
+  useEffect(() => {
+    if (isSuccess) {
+      toast.success('Login successfully!')
+      push(`/login/verify?email=${email || getValues('email')}&rememberMe=${rememberMe}`)
+    }
+    if (isError) toast.error(rtkErrorMesage(error))
+  }, [isSuccess, isError, error, email, getValues, push, rememberMe])
+
   return (
     <div className='py-10 container'>
       <LLink href='/'>
