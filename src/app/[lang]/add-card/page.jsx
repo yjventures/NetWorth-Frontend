@@ -1,3 +1,4 @@
+import DisplayTab from '@/components/pages/add-card/Tabs/Display'
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
 import Typography from '@/components/ui/typography'
 import { X } from 'lucide-react'
@@ -16,14 +17,12 @@ export default function AddCardPage() {
       <Tabs defaultValue='display'>
         <div className='flex justify-center pt-5'>
           <TabsList className=''>
-            <TabsTrigger value='display' className=''>
-              Display
-            </TabsTrigger>
+            <TabsTrigger value='display'>Display</TabsTrigger>
             <TabsTrigger value='basics'>Basics</TabsTrigger>
             <TabsTrigger value='advanced'>Advanced</TabsTrigger>
           </TabsList>
         </div>
-        <TabsContent value='display'>Display</TabsContent>
+        <DisplayTab />
         <TabsContent value='basics'>Basics</TabsContent>
         <TabsContent value='advanced'>Advanced</TabsContent>
       </Tabs>
