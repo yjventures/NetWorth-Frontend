@@ -7,10 +7,17 @@ import sliderImage3 from '@/assets/images/homepage/thirdSlide.png'
 import { Button } from '@/components/ui/button'
 import { Img } from '@/components/ui/img'
 import LLink from '@/components/ui/llink'
+import { useRef } from 'react'
 import { Pagination } from 'swiper/modules'
 import { Swiper, SwiperSlide } from 'swiper/react'
 
 export default function Home() {
+  const cameraInputRef = useRef(null)
+  const handleImageChange = event => {
+    const file = event.target.files[0]
+    console.log(file)
+    // Here, you can also preview the image or upload it
+  }
   return (
     <main className='container'>
       <Swiper
@@ -53,9 +60,21 @@ export default function Home() {
               <LLink href='/signup'>
                 <Button className='w-full h-14 rounded-2xl'>Sign up with email</Button>
               </LLink>
-              <Button className='w-full h-14 rounded-2xl' variant='tartiary'>
+              <Button
+                className='w-full h-14 rounded-2xl'
+                variant='tartiary'
+                onClick={() => cameraInputRef.current.click()}
+              >
                 Scan Business Card
               </Button>
+              <input
+                className='hidden'
+                type='file'
+                accept='image/*'
+                capture='environment'
+                onChange={handleImageChange}
+                ref={cameraInputRef}
+              />
             </div>
           </div>
         </SwiperSlide>
