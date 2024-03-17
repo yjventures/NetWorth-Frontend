@@ -19,7 +19,7 @@ export default function DisplayCard({ selected, variant, className, color, ...re
     <div>
       <div
         className={cn('relative size-24 rounded-md overflow-hidden bg-gray-300 cursor-pointer', {
-          'outline outline-green-400': selected
+          'outline outline-4 outline-green-400': selected
         })}
         {...rest}
       >

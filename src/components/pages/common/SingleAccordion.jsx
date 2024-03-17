@@ -6,7 +6,7 @@ export default function SingleAccordion({ children, value, label, className }) {
     <Accordion type='single' defaultValue={value} collapsible className={cn('w-full', className)}>
       <AccordionItem value={value}>
         <AccordionTrigger>{label}</AccordionTrigger>
-        <AccordionContent>{children}</AccordionContent>
+        <AccordionContent className='p-1'>{children}</AccordionContent>
       </AccordionItem>
     </Accordion>
   )

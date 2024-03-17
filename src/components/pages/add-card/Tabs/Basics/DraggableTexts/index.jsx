@@ -4,7 +4,7 @@ const dummyTextsArr = ['john.banega.don@hotmail.com', 'Chota Don', '+88012322343
 
 export default function DrgaggableTextContainer() {
   return (
-    <div className='flex flex-wrap gap-2 p-3 bg-secondary rounded-lg border shadow-sm'>
+    <div className='flex flex-wrap gap-2 p-3 bg-secondary rounded-lg border shadow-sm mt-5'>
       {dummyTextsArr.map(text => (
         <DraggableText key={text} text={text} />
       ))}
