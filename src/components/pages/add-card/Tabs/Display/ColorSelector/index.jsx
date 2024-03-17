@@ -3,8 +3,8 @@
 import colorWheel from '@/assets/images/add-card/color-wheel.png'
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@/components/ui/accordion'
 import { Img } from '@/components/ui/img'
+import { CARD_COLORS } from '@/configs/common'
 import { useRef } from 'react'
-import { COLORS } from '..'
 import { ColorButton } from './ColorButton'
 
 export default function ColorSelector({ color: selectedColor, setcolor }) {
@@ -24,7 +24,7 @@ export default function ColorSelector({ color: selectedColor, setcolor }) {
             />
             <Img src={colorWheel} alt='color wheel' className='size-9' onClick={() => colorWheelRef.current.click()} />
 
-            {COLORS.map(color => (
+            {CARD_COLORS.map(color => (
               <ColorButton
                 key={color.id}
                 color={color.color}
