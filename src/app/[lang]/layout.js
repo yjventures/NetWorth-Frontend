@@ -2,6 +2,7 @@ import ReduxProvider from '@/lib/redux/redux-provider'
 import '@/styles/globals.scss'
 import { Poppins } from 'next/font/google'
 import { Toaster } from 'react-hot-toast'
+import 'react-phone-input-2/lib/plain.css'
 import 'swiper/css'
 import 'swiper/css/pagination'
 

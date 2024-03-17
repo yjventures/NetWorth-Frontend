@@ -31,11 +31,15 @@ const Input = forwardRef(
             </div>
           )}
         </div>
-        {errors[name] && errors[name]?.type === 'required' ? (
-          <span className='text-red-500 text-sm h-5 leading-none'>{label} is required</span>
-        ) : (
-          <div className='w-full h-6' />
-        )}
+        {required ? (
+          <>
+            {errors[name] && errors[name]?.type === 'required' ? (
+              <span className='text-red-500 text-sm h-5 leading-none'>{label} is required</span>
+            ) : (
+              <div className='w-full h-6' />
+            )}
+          </>
+        ) : null}
       </div>
     )
   }

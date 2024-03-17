@@ -10,15 +10,14 @@ import {
   DialogTrigger
 } from '@/components/ui/dialog'
 import { Textarea } from '@/components/ui/textarea'
-import { PlusCircle } from 'lucide-react'
 
-export default function AddBio({ register, errors }) {
+export default function AddBio({ register, errors, label }) {
   return (
     <Dialog>
       <DialogTrigger asChild>
         <div className='pt-5 flex justify-center'>
           <Button variant='default' className='rounded-lg h-10'>
-            <PlusCircle /> Add Bio
+            {label}
           </Button>
         </div>
       </DialogTrigger>
