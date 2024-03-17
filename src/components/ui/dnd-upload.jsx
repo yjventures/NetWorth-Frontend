@@ -45,7 +45,7 @@ const DnDUpload = ({ setUploadURL, icon, label, buttonLabel, className, ...rest 
         }
       })
 
-      if (response?.data?.status === 'success') {
+      if (response?.data?.status) {
         toast.success('File uploaded successfully!')
         setUploadURL(response?.data?.uploadedUrl)
       }
