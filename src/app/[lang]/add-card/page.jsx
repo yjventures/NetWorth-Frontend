@@ -1,3 +1,4 @@
+import BasicsTab from '@/components/pages/add-card/Tabs/Basics'
 import DisplayTab from '@/components/pages/add-card/Tabs/Display'
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
 import Typography from '@/components/ui/typography'
@@ -8,7 +9,7 @@ export default function AddCardPage() {
     <div className='py-10 container'>
       <div className='flex items-center justify-between'>
         <div className='border border-black rounded-full p-0.5'>
-          <X className='size-4' />
+          <X className='size-4' strokeWidth={3} />
         </div>
         <Typography variant='h4'>Add a card</Typography>
         <button className='text-blue-600 font-semibold text-[17px]'>Save</button>
@@ -23,7 +24,7 @@ export default function AddCardPage() {
           </TabsList>
         </div>
         <DisplayTab />
-        <TabsContent value='basics'>Basics</TabsContent>
+        <BasicsTab />
         <TabsContent value='advanced'>Advanced</TabsContent>
       </Tabs>
     </div>
