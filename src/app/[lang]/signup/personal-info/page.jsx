@@ -1,5 +1,6 @@
 'use client'
 
+import AddBio from '@/components/pages/personal-info/AddBio'
 import ProfilePhotoUploadComponent from '@/components/pages/personal-info/ProfilePhotoUploadComponent'
 import { Button } from '@/components/ui/button'
 import LLink from '@/components/ui/llink'
@@ -17,7 +18,6 @@ export default function PersonalInfoPage() {
   const {
     register,
     handleSubmit,
-    setValue,
     formState: { errors }
   } = useForm()
 
@@ -41,10 +41,11 @@ export default function PersonalInfoPage() {
         </Button>
       </LLink>
 
-      <Typography variant='h1' className='font-medium pt-10 pb-5'>
+      <Typography variant='h1' className='font-medium py-5 text-center'>
         Update Profile
       </Typography>
       <ProfilePhotoUploadComponent profile_image={profile_image} setprofile_image={setprofile_image} />
+      <AddBio register={register} errors={errors} />
     </div>
   )
 }

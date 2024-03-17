@@ -37,12 +37,12 @@ export default function ProfilePhotoUploadComponent({ profile_image, setprofile_
     }
   }
   return (
-    <div className='flex items-center gap-5'>
+    <div className='flex flex-col items-center gap-1'>
       <input type='file' ref={inputBtnRef} onChange={handleChange} accept='image/*' className='hidden' />
       {profile_image ? (
-        <Img src={profile_image} alt='User photo' className='w-16 h-16 object-cover rounded-full' />
+        <Img src={profile_image} alt='User photo' className='size-24 object-cover rounded-full' />
       ) : (
-        <Img src={avatar} alt='User photo' className='w-16 h-16 object-cover rounded-full' />
+        <Img src={avatar} alt='User photo' className='size-24 object-cover rounded-full' />
       )}
 
       <div
