@@ -4,22 +4,34 @@ import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import LLink from '@/components/ui/llink'
 import Typography from '@/components/ui/typography'
+import { signupPasswordRegex } from '@/configs/auth'
 import usePush from '@/hooks/usePush'
 import { useSignUpMutation } from '@/redux/features/authApi'
 import { rtkErrorMesage } from '@/utils/error/errorMessage'
 import { ChevronLeft, Lock, Mail, User } from 'lucide-react'
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
 import { useForm } from 'react-hook-form'
 import toast from 'react-hot-toast'
 
 export default function SignupPage() {
   const push = usePush()
+  const [isPasswordInvalid, setisPasswordInvalid] = useState(false)
   const {
     register,
+    watch,
     handleSubmit,
     getValues,
     formState: { errors }
   } = useForm()
+
+  useEffect(() => {
+    const inputPassword = watch('password')
+    if (inputPassword && !signupPasswordRegex.test(inputPassword)) {
+      setisPasswordInvalid(true)
+    } else {
+      setisPasswordInvalid(false)
+    }
+  }, [watch('password')])
 
   const [signUp, { isSuccess, isError, error }] = useSignUpMutation()
 
@@ -79,7 +91,16 @@ export default function SignupPage() {
           errors={errors}
           label='Password'
           required
+          hookFormConfig={{
+            pattern: signupPasswordRegex
+          }}
         />
+        {isPasswordInvalid ? (
+          <p className='text-red-500 text-xs pb-3'>
+            Password must have at least one lowercase letter, one uppercase letter, one digit, one special character,
+            and be 8-15 characters long.
+          </p>
+        ) : null}
         <div className='space-y-2.5'>
           <Button className='w-full' type='submit'>
             Register

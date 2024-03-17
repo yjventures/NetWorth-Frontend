@@ -60,12 +60,12 @@ export default function SignUpEmailVerifyPage() {
           )}
         />
 
-        <Button className='w-full rounded-2xl mt-12 mb-3' onClick={() => verifySignUp({ email, otp })}>
+        <Button className='w-full rounded-2xl mt-12' onClick={() => verifySignUp({ email, otp })}>
           Verify
         </Button>
-        <Button className='w-full rounded-2xl' variant='tartiary'>
+        {/* <Button className='w-full rounded-2xl' variant='tartiary'>
           Send Again
-        </Button>
+        </Button> */}
       </div>
     </div>
   )

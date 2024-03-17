@@ -39,7 +39,7 @@ export default function LoginVerifyPage() {
           setCookie('accessToken', accessToken)
           setCookie('userData', JSON.stringify(userData))
         }
-        push('/')
+        push('/signup/personal-info')
       }
     }
     if (isError) toast.error(rtkErrorMesage(error))
