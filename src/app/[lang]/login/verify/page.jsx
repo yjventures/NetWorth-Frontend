@@ -1,5 +1,6 @@
 'use client'
 
+import AddCardPromtDialog from '@/components/pages/personal-info/AddCardPromtDialog'
 import { Button } from '@/components/ui/button'
 import { InputOTP, InputOTPGroup, InputOTPSlot } from '@/components/ui/input-otp'
 import LLink from '@/components/ui/llink'
@@ -23,10 +24,12 @@ export default function LoginVerifyPage() {
 
   const [verifyLogin, { isSuccess, isError, error, data }] = useVerifyLoginMutation()
 
+  const [open, setopen] = useState(false)
+
   useEffect(() => {
     if (isSuccess) {
-      toast.success('Email verified successfully!')
-      if (data?.status) {
+      if (data?.success) {
+        toast.success('Email verified successfully!')
         const { accessToken, refreshToken, data: userData } = { ...data }
         if (rememberMe === 'true') {
           setCookie('refreshToken', refreshToken, { maxAge: calculateTokenExpiration(refreshToken) })
@@ -39,7 +42,16 @@ export default function LoginVerifyPage() {
           setCookie('accessToken', accessToken)
           setCookie('userData', JSON.stringify(userData))
         }
-        push('/signup/personal-info')
+
+        if (userData?.personal_info?.bio) {
+          if (userData?.cards?.length) {
+            push('/')
+          } else {
+            setopen(true)
+          }
+        } else {
+          push('/signup/personal-info')
+        }
       }
     }
     if (isError) toast.error(rtkErrorMesage(error))
@@ -84,6 +96,7 @@ export default function LoginVerifyPage() {
           Send Again
         </Button> */}
       </div>
+      <AddCardPromtDialog open={open} setopen={setopen} />
     </div>
   )
 }

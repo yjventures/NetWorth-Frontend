@@ -36,7 +36,9 @@ export default function AddBio({ register, errors, label }) {
         />
         <DialogFooter>
           <DialogClose>
-            <Button className='rounded-lg w-full'>Add Bio</Button>
+            <Button className='rounded-lg w-full' type='button'>
+              Add Bio
+            </Button>
           </DialogClose>
         </DialogFooter>
       </DialogContent>

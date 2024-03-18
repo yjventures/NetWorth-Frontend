@@ -80,7 +80,13 @@ export default function AddCardPromtDialog({ open, setopen }) {
                 Cancel
               </Button>
             </DialogClose>
-            <Button className='rounded-md' onClick={() => cameraInputRef.current.click()}>
+            <Button
+              className='rounded-md'
+              onClick={() => {
+                cameraInputRef.current.click()
+                setopen(false)
+              }}
+            >
               Add Card
             </Button>
             <input
