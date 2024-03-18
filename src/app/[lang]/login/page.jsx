@@ -94,7 +94,9 @@ export default function LoginPage() {
           </LLink>
         </div>
         <div className='space-y-2.5'>
-          <Button className='w-full'>Login</Button>
+          <Button className='w-full' type='submit'>
+            Login
+          </Button>
           <div className='flex items-center justify-center space-x-3'>
             <p className='text-muted-foreground'>Don&apos;t have an account?</p>
             <LLink href='/signup' className='text-blue-600'>

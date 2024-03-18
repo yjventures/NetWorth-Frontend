@@ -1,6 +1,7 @@
 'use client'
 
 import addCardPromptImg from '@/assets/images/add-card/add-card-prompt.jpeg'
+import animationData from '@/assets/lottie/scanning.json'
 import { Button } from '@/components/ui/button'
 
 import {
@@ -13,6 +14,7 @@ import {
   DialogTitle
 } from '@/components/ui/dialog'
 import { Img } from '@/components/ui/img'
+import Overlay from '@/components/ui/overlay'
 import { API_URL } from '@/configs'
 import { useOCRMutation } from '@/redux/features/cardsApi'
 import axios from 'axios'
@@ -58,48 +60,53 @@ export default function AddCardPromtDialog({ open, setopen }) {
       console.log(data)
     }
     if (isError) toast.error(rtkErrorMesage(error))
-  }, [isSuccess, isError, error, data])
+  }, [isSuccess, isError, error])
+
+  console.log(open)
 
   return (
-    <Dialog open={open} onOpenChange={setopen}>
-      <DialogContent>
-        <DialogHeader>
-          <DialogTitle className='text-center'>Now add your first card</DialogTitle>
-          <DialogDescription className='text-center'>
-            <Img src={addCardPromptImg} alt='add-card-prompt' className='w-3/4 text-center inline-block my-3' />
-            <p className='text-balance'>
-              Add your first ever card in your card list. Simply take a picture of your card and drag n drop texts in
-              the input.
-            </p>
-          </DialogDescription>
-        </DialogHeader>
-        <DialogFooter>
-          <div className='flex justify-center gap-3'>
-            <DialogClose>
-              <Button className='rounded-md' variant='secondary'>
-                Cancel
+    <>
+      <Dialog open={open} onOpenChange={setopen}>
+        <DialogContent>
+          <DialogHeader>
+            <DialogTitle className='text-center'>Now add your first card</DialogTitle>
+            <DialogDescription className='text-center'>
+              <Img src={addCardPromptImg} alt='add-card-prompt' className='w-3/4 text-center inline-block my-3' />
+              <p className='text-balance'>
+                Add your first ever card in your card list. Simply take a picture of your card and drag n drop texts in
+                the input.
+              </p>
+            </DialogDescription>
+          </DialogHeader>
+          <DialogFooter>
+            <div className='flex justify-center gap-3'>
+              <DialogClose>
+                <Button className='rounded-md' variant='secondary'>
+                  Cancel
+                </Button>
+              </DialogClose>
+              <Button
+                className='rounded-md'
+                onClick={() => {
+                  cameraInputRef.current.click()
+                  setopen(false)
+                }}
+              >
+                Add Card
               </Button>
-            </DialogClose>
-            <Button
-              className='rounded-md'
-              onClick={() => {
-                cameraInputRef.current.click()
-                setopen(false)
-              }}
-            >
-              Add Card
-            </Button>
-            <input
-              className='hidden'
-              type='file'
-              accept='image/*'
-              capture='environment'
-              onChange={handleImageChange}
-              ref={cameraInputRef}
-            />
-          </div>
-        </DialogFooter>
-      </DialogContent>
-    </Dialog>
+              <input
+                className='hidden'
+                type='file'
+                accept='image/*'
+                capture='environment'
+                onChange={handleImageChange}
+                ref={cameraInputRef}
+              />
+            </div>
+          </DialogFooter>
+        </DialogContent>
+      </Dialog>
+      <Overlay isOpen={isLoading} animationData={animationData} />
+    </>
   )
 }

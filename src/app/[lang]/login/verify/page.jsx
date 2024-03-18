@@ -55,7 +55,7 @@ export default function LoginVerifyPage() {
       }
     }
     if (isError) toast.error(rtkErrorMesage(error))
-  }, [isSuccess, isError, error, email, push, rememberMe, data])
+  }, [isSuccess, isError, error, email, rememberMe, data])
 
   return (
     <div className='py-10 container'>
@@ -66,7 +66,7 @@ export default function LoginVerifyPage() {
       </LLink>
 
       <div className='flex flex-col items-center justify-center mt-20 rounded-3xl bg-gray-100 border border-gray-200 shadow-sm px-6 py-10'>
-        <Typography variant='h3' className='font-medium'>
+        <Typography variant='h3' className='font-medium' type='submit'>
           Verify Login
         </Typography>
         <p className='text-muted-foreground text-sm mt-3'>We Have Sent Code To Your email</p>
