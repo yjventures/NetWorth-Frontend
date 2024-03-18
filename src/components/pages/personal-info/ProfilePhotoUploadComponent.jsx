@@ -36,6 +36,7 @@ export default function ProfilePhotoUploadComponent({ profile_image, setprofile_
       console.error('Error uploading file', error)
     }
   }
+
   return (
     <div className='flex flex-col items-center gap-1'>
       <input type='file' ref={inputBtnRef} onChange={handleChange} accept='image/*' className='hidden' />

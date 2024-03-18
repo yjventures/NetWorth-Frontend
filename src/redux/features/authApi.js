@@ -11,7 +11,7 @@ const authApi = api.injectEndpoints({
     }),
     verifySignup: build.mutation({
       query: payload => ({
-        url: '/varify-email',
+        url: '/verify-email',
         method: 'POST',
         body: payload
       })
@@ -25,7 +25,7 @@ const authApi = api.injectEndpoints({
     }),
     verifyLogin: build.mutation({
       query: payload => ({
-        url: '/user/varify-login',
+        url: '/user/verify-login',
         method: 'POST',
         body: payload
       })
