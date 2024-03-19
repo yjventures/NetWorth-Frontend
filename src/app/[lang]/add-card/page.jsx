@@ -1,13 +1,15 @@
 'use client'
 
+import AdvancedTab from '@/components/pages/add-card/Tabs/Advanced'
 import BasicsTab from '@/components/pages/add-card/Tabs/Basics'
 import DisplayTab from '@/components/pages/add-card/Tabs/Display'
-import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
+import { Tabs, TabsList, TabsTrigger } from '@/components/ui/tabs'
 import Typography from '@/components/ui/typography'
 import { useCreateEmptyCardMutation } from '@/redux/features/cardsApi'
 import { resetCardTexts, setCardId } from '@/redux/features/slices/tempCardSlice'
 import { useUpdatePersoanlInfoMutation } from '@/redux/features/usersApi'
 import { rtkErrorMesage } from '@/utils/error/errorMessage'
+import { deleteCookie, getCookie, setCookie } from 'cookies-next'
 import { X } from 'lucide-react'
 import { useEffect } from 'react'
 import toast from 'react-hot-toast'
@@ -27,6 +29,7 @@ export default function AddCardPage() {
   useEffect(() => {
     if (isSuccess) {
       toast.success('Card intialization successfull!')
+      setCookie('cardId', data?.data?._id)
       dispatch(setCardId(data?.data?._id))
     }
     if (isError) toast.error(rtkErrorMesage(error))
@@ -35,6 +38,7 @@ export default function AddCardPage() {
   useEffect(() => {
     if (isCardSuccess) {
       toast.success('Card created successfully!')
+      deleteCookie('cardId')
       dispatch(setCardId(''))
       dispatch(resetCardTexts())
     }
@@ -52,7 +56,7 @@ export default function AddCardPage() {
         <Typography variant='h4'>Add a card</Typography>
         <button
           className='text-blue-600 font-semibold text-[17px]'
-          onClick={() => updateCard({ id: cardId, payload: cardDetails })}
+          onClick={() => updateCard({ id: getCookie('cardId'), payload: cardDetails })}
         >
           Save
         </button>
@@ -68,7 +72,7 @@ export default function AddCardPage() {
         </div>
         <DisplayTab />
         <BasicsTab />
-        <TabsContent value='advanced'>Advanced</TabsContent>
+        <AdvancedTab />
       </Tabs>
     </div>
   )

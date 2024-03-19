@@ -63,7 +63,7 @@ export default function PersonalInfoPage() {
   }, [isSuccess, isError, error])
 
   return (
-    <>
+    <div suppressHydrationWarning>
       <div className='py-10 container'>
         <LLink href='/'>
           <Button variant='icon' className='shadow-sm px-3 h-10 rounded-lg'>
@@ -131,6 +131,6 @@ export default function PersonalInfoPage() {
         </form>
       </div>
       <AddCardPromtDialog open={open} setopen={setopen} />
-    </>
+    </div>
   )
 }
