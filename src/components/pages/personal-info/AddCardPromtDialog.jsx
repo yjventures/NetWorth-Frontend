@@ -16,12 +16,17 @@ import {
 import { Img } from '@/components/ui/img'
 import Overlay from '@/components/ui/overlay'
 import { API_URL } from '@/configs'
+import usePush from '@/hooks/usePush'
 import { useOCRMutation } from '@/redux/features/cardsApi'
+import { setCardTexts } from '@/redux/features/slices/tempCardSlice'
 import axios from 'axios'
 import { useEffect, useRef } from 'react'
 import toast from 'react-hot-toast'
+import { useDispatch } from 'react-redux'
 
 export default function AddCardPromtDialog({ open, setopen }) {
+  const push = usePush()
+  const dispatch = useDispatch()
   const cameraInputRef = useRef(null)
 
   const [scanCard, { isLoading, isSuccess, isError, error, data }] = useOCRMutation()
@@ -56,17 +61,17 @@ export default function AddCardPromtDialog({ open, setopen }) {
 
   useEffect(() => {
     if (isSuccess) {
+      setopen(false)
       toast.success('Card Scanned Successfully!')
-      console.log(data)
+      dispatch(setCardTexts(data?.data?.form_text))
+      push('/add-card')
     }
     if (isError) toast.error(rtkErrorMesage(error))
   }, [isSuccess, isError, error])
 
-  console.log(open)
-
   return (
     <>
-      <Dialog open={open} onOpenChange={setopen}>
+      <Dialog open={open} onOpenChange={setopen} suppressHydrationWarning>
         <DialogContent>
           <DialogHeader>
             <DialogTitle className='text-center'>Now add your first card</DialogTitle>
@@ -85,13 +90,7 @@ export default function AddCardPromtDialog({ open, setopen }) {
                   Cancel
                 </Button>
               </DialogClose>
-              <Button
-                className='rounded-md'
-                onClick={() => {
-                  cameraInputRef.current.click()
-                  setopen(false)
-                }}
-              >
+              <Button className='rounded-md' onClick={() => cameraInputRef.current.click()}>
                 Add Card
               </Button>
               <input

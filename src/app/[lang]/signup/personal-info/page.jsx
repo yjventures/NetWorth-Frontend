@@ -9,7 +9,6 @@ import { Label } from '@/components/ui/label'
 import LLink from '@/components/ui/llink'
 import { Textarea } from '@/components/ui/textarea'
 import Typography from '@/components/ui/typography'
-import usePush from '@/hooks/usePush'
 import { useUpdatePersoanlInfoMutation } from '@/redux/features/usersApi'
 import { rtkErrorMesage } from '@/utils/error/errorMessage'
 import { ChevronLeft, FilePenLine, PlusCircle } from 'lucide-react'
@@ -19,7 +18,6 @@ import toast from 'react-hot-toast'
 import PhoneInput from 'react-phone-input-2'
 
 export default function PersonalInfoPage() {
-  const push = usePush()
   const {
     register,
     getValues,
@@ -42,7 +40,6 @@ export default function PersonalInfoPage() {
   useEffect(() => {
     if (isSuccess) {
       toast.success('Profile updated successfully!')
-      //push('/add-card')
       setopen(true)
     }
     if (isError) toast.error(rtkErrorMesage(error))
