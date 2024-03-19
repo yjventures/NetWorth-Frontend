@@ -14,6 +14,14 @@ export default function DragInputs() {
     <SingleAccordion label='Personal' value='personal'>
       <div className='space-y-4'>
         <DragInput
+          value={bio}
+          onChange={e => dispatch(setCardDetails({ bio: e.target.value }))}
+          placeholder='Bio'
+          rows={5}
+          textarea
+          val='bio'
+        />
+        <DragInput
           value={name}
           onChange={e => dispatch(setCardDetails({ name: e.target.value }))}
           placeholder='Name'
@@ -32,14 +40,6 @@ export default function DragInputs() {
           placeholder='Phone Number'
           multiple
           val='phone_number'
-        />
-        <DragInput
-          value={bio}
-          onChange={e => dispatch(setCardDetails({ bio: e.target.value }))}
-          placeholder='Bio'
-          rows={5}
-          textarea
-          val='bio'
         />
         <DragInput
           value={designation}

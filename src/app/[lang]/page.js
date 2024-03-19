@@ -15,9 +15,8 @@ export default function Home() {
   const cameraInputRef = useRef(null)
   const handleImageChange = event => {
     const file = event.target.files[0]
-    console.log(file)
-    // Here, you can also preview the image or upload it
   }
+
   return (
     <main className='container'>
       <Swiper

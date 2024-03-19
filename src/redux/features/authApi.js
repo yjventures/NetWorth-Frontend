@@ -29,8 +29,33 @@ const authApi = api.injectEndpoints({
         method: 'POST',
         body: payload
       })
+    }),
+    verifyForgotEmail: build.query({
+      query: email => ({
+        url: `/recover-verify-email/${email}`
+      })
+    }),
+    verifyForgotOTP: build.query({
+      query: ({ email, otp }) => ({
+        url: `/recover-verify-email/${email}/${otp}`
+      })
+    }),
+    setNewPassword: build.mutation({
+      query: payload => ({
+        url: '/recover-reset-password',
+        method: 'POST',
+        body: payload
+      })
     })
   })
 })
 
-export const { useSignUpMutation, useVerifySignupMutation, useLoginMutation, useVerifyLoginMutation } = authApi
+export const {
+  useSignUpMutation,
+  useVerifySignupMutation,
+  useLoginMutation,
+  useVerifyLoginMutation,
+  useVerifyForgotEmailQuery,
+  useVerifyForgotOTPQuery,
+  useSetNewPasswordMutation
+} = authApi
