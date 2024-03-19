@@ -5,6 +5,7 @@ const initialState = {
   cardId: '',
   cardDetails: {
     card_name: '',
+    address: '',
     design: 'linear',
     color: '',
     profile_image: '',
