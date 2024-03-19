@@ -4,18 +4,66 @@ import sliderImage1 from '@/assets/images/homepage/firstslide.png'
 import sliderImage2 from '@/assets/images/homepage/secondSlide.png'
 import sliderImage2_2 from '@/assets/images/homepage/secondSlide2.png'
 import sliderImage3 from '@/assets/images/homepage/thirdSlide.png'
+import animationData from '@/assets/lottie/scanning.json'
 import { Button } from '@/components/ui/button'
 import { Img } from '@/components/ui/img'
 import LLink from '@/components/ui/llink'
-import { useRef } from 'react'
+import Overlay from '@/components/ui/overlay'
+import { API_URL } from '@/configs'
+import usePush from '@/hooks/usePush'
+import { useOCRMutation } from '@/redux/features/cardsApi'
+import { setCardTexts } from '@/redux/features/slices/tempCardSlice'
+import { rtkErrorMesage } from '@/utils/error/errorMessage'
+import axios from 'axios'
+import { useEffect, useRef } from 'react'
+import toast from 'react-hot-toast'
+import { useDispatch } from 'react-redux'
 import { Pagination } from 'swiper/modules'
 import { Swiper, SwiperSlide } from 'swiper/react'
 
 export default function Home() {
+  const push = usePush()
+  const dispatch = useDispatch()
   const cameraInputRef = useRef(null)
-  const handleImageChange = event => {
-    const file = event.target.files[0]
+
+  const [scanCard, { isLoading, isSuccess, isError, error, data }] = useOCRMutation()
+
+  const handleImageChange = e => {
+    const files = e.target.files
+    if (files.length) {
+      uploadFile(files[0])
+    }
   }
+
+  const uploadFile = async file => {
+    const formData = new FormData()
+    formData.append('file', file)
+
+    try {
+      toast.success('Uploading file, please wait...')
+      const response = await axios.post(`${API_URL}/upload`, formData, {
+        headers: {
+          'Content-Type': 'multipart/form-data'
+        }
+      })
+
+      if (response?.data?.status) {
+        toast.success('File uploaded successfully!')
+        scanCard({ imageUrl: response?.data?.uploadedUrl })
+      }
+    } catch (error) {
+      console.error('Error uploading file', error)
+    }
+  }
+
+  useEffect(() => {
+    if (isSuccess) {
+      toast.success('Card Scanned Successfully!')
+      dispatch(setCardTexts(data?.data?.form_text))
+      push('/signup/via-card')
+    }
+    if (isError) toast.error(rtkErrorMesage(error))
+  }, [isSuccess, isError, error])
 
   return (
     <main className='container'>
@@ -78,6 +126,7 @@ export default function Home() {
           </div>
         </SwiperSlide>
       </Swiper>
+      <Overlay isOpen={isLoading} animationData={animationData} />
     </main>
   )
 }
