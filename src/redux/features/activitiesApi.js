@@ -11,7 +11,7 @@ const activitiesApi = api.injectEndpoints({
     createActivity: build.mutation({
       query: ({ cardId, payload }) => ({
         url: `/user/card/${cardId}/activity`,
-        method: 'POST',
+        method: 'PUT',
         body: payload
       }),
       invalidatesTags: ['activities']

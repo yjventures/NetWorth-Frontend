@@ -8,7 +8,7 @@ import { useRef, useState } from 'react'
 import toast from 'react-hot-toast'
 import { Button } from './button'
 
-const DnDUpload = ({ setUploadURL, icon, label, buttonLabel, className, cb, ...rest }) => {
+const DnDUpload = ({ setUploadURL, icon, label, buttonLabel, className, cb = () => {}, ...rest }) => {
   const [file, setfile] = useState(null)
   const inputBtnRef = useRef(null)
 
