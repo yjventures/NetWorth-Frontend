@@ -9,9 +9,9 @@ import {
   DialogTitle,
   DialogTrigger
 } from '@/components/ui/dialog'
-import { Textarea } from '@/components/ui/textarea'
+import { SimpleTextarea } from '@/components/ui/simple-textarea'
 
-export default function AddBio({ register, errors, label }) {
+export default function AddBio({ bio, setbio, label }) {
   return (
     <Dialog>
       <DialogTrigger asChild>
@@ -26,19 +26,16 @@ export default function AddBio({ register, errors, label }) {
           <DialogTitle>Add Bio</DialogTitle>
           <DialogDescription>Express yourself in a few words</DialogDescription>
         </DialogHeader>
-        <Textarea
-          name='bio'
+        <SimpleTextarea
           placeholder='Write your bio'
-          register={register}
-          errors={errors}
+          value={bio}
+          onChange={e => setbio(e.target.value)}
           className='rounded-lg'
           rows={5}
         />
         <DialogFooter>
           <DialogClose>
-            <Button className='rounded-lg w-full' type='button'>
-              Add Bio
-            </Button>
+            <Button className='rounded-lg w-full'>Add Bio</Button>
           </DialogClose>
         </DialogFooter>
       </DialogContent>

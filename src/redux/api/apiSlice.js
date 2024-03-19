@@ -7,13 +7,13 @@ import { getCookie, setCookie } from 'cookies-next'
 import toast from 'react-hot-toast'
 
 const baseQuery = fetchBaseQuery({
-  baseUrl: API_URL,
+  baseUrl: API_URL
 })
 
 const baseQueryWithReauth = async (args, api, extraOptions) => {
   args.headers = {
     ...args.headers,
-    Authorization: `Bearer ${getToken()}`,
+    Authorization: `Bearer ${getToken()}`
   }
 
   const refreshToken = getCookie('refreshToken')
@@ -21,14 +21,14 @@ const baseQueryWithReauth = async (args, api, extraOptions) => {
 
   if (result?.error?.status === 401) {
     const refreshResult = await axios.post(`${API_URL}/access-token`, {
-      refreshToken: `Bearer ${refreshToken}`,
+      refreshToken: `Bearer ${refreshToken}`
     })
 
     if (refreshResult?.data?.accessToken) {
       const newAccessToken = refreshResult?.data?.accessToken
       const accessTokenExpiration = calculateTokenExpiration(newAccessToken)
       setCookie('accessToken', newAccessToken, {
-        maxAge: accessTokenExpiration,
+        maxAge: accessTokenExpiration
       })
       result = await baseQuery(args, api, extraOptions)
     } else {
@@ -42,8 +42,8 @@ const baseQueryWithReauth = async (args, api, extraOptions) => {
 const api = createApi({
   reducerPath: 'api',
   baseQuery: baseQueryWithReauth,
-  tagTypes: [],
-  endpoints: () => ({}),
+  tagTypes: ['personal_info'],
+  endpoints: () => ({})
 })
 
 export default api

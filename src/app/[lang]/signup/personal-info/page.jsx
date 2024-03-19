@@ -9,7 +9,7 @@ import { Label } from '@/components/ui/label'
 import LLink from '@/components/ui/llink'
 import { Textarea } from '@/components/ui/textarea'
 import Typography from '@/components/ui/typography'
-import { useUpdatePersoanlInfoMutation } from '@/redux/features/usersApi'
+import { useGetPersonalInfoQuery, useUpdatePersoanlInfoMutation } from '@/redux/features/usersApi'
 import { rtkErrorMesage } from '@/utils/error/errorMessage'
 import { ChevronLeft, FilePenLine, PlusCircle } from 'lucide-react'
 import { useEffect, useState } from 'react'
@@ -20,13 +20,28 @@ import PhoneInput from 'react-phone-input-2'
 export default function PersonalInfoPage() {
   const {
     register,
-    getValues,
     handleSubmit,
+    setValue,
     formState: { errors }
   } = useForm()
 
   const [profile_image, setprofile_image] = useState('')
   const [phone_number, setphone_number] = useState('')
+  const [bio, setbio] = useState('')
+
+  const { data } = useGetPersonalInfoQuery()
+
+  useEffect(() => {
+    const personalInfo = data?.data?.user?.personal_info
+    if (personalInfo) {
+      setprofile_image(personalInfo?.profile_image)
+      setphone_number(personalInfo?.phone_number)
+      setbio(personalInfo?.bio)
+      setValue('address', personalInfo?.address)
+      setValue('designation', personalInfo?.designation)
+      setValue('date_of_birth', personalInfo?.date_of_birth)
+    }
+  }, [data, setValue])
 
   const [updateProfile, { isSuccess, isError, error }] = useUpdatePersoanlInfoMutation()
 
@@ -40,7 +55,9 @@ export default function PersonalInfoPage() {
   useEffect(() => {
     if (isSuccess) {
       toast.success('Profile updated successfully!')
-      setopen(true)
+      if (data?.data?.cardLength === 0) {
+        setopen(true)
+      }
     }
     if (isError) toast.error(rtkErrorMesage(error))
   }, [isSuccess, isError, error])
@@ -59,14 +76,12 @@ export default function PersonalInfoPage() {
         </Typography>
         <form onSubmit={handleSubmit(onSubmit)}>
           <ProfilePhotoUploadComponent profile_image={profile_image} setprofile_image={setprofile_image} />
-          {getValues('bio') ? (
-            <p className='text-balance text-center font-medium italic pt-3'>{getValues('bio')}</p>
-          ) : null}
+          {bio ? <p className='text-balance text-center font-medium italic pt-3'>{bio}</p> : null}
           <AddBio
-            register={register}
-            errors={errors}
+            bio={bio}
+            setbio={setbio}
             label={
-              getValues('bio') ? (
+              bio ? (
                 <div className='flex items-center gap-2'>
                   <FilePenLine className='size-5' />
                   Update Bio

@@ -5,16 +5,18 @@ const usersApi = api.injectEndpoints({
     getPersonalInfo: build.query({
       query: () => ({
         url: '/user/personal-info'
-      })
+      }),
+      providesTags: ['personal_info']
     }),
     updatePersoanlInfo: build.mutation({
       query: payload => ({
         url: '/user/personal-info',
         method: 'PUT',
         body: payload
-      })
+      }),
+      invalidatesTags: ['personal_info']
     })
   })
 })
 
-export const { useUpdatePersoanlInfoMutation } = usersApi
+export const { useGetPersonalInfoQuery, useUpdatePersoanlInfoMutation } = usersApi
