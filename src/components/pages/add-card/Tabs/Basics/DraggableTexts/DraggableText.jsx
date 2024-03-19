@@ -22,7 +22,7 @@ export default function DraggableText({ text }) {
   }
   return (
     <div
-      className='text-xs text-white bg-secondary-foreground px-2.5 py-1 rounded-md cursor-pointer'
+      className='text-sm text-white bg-secondary-foreground px-2.5 py-1.5 rounded-md cursor-pointer'
       draggable
       onDragStart={e => handleDragStart(e, text)}
       onDragEnd={handleDragEnd}

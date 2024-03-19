@@ -15,12 +15,12 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html>
-      <body className={poppins.className} suppressHydrationWarning>
-        <ReduxProvider>
+      <ReduxProvider>
+        <body className={poppins.className} suppressHydrationWarning>
           <main>{children}</main>
           <Toaster position='top-center' />
-        </ReduxProvider>
-      </body>
+        </body>
+      </ReduxProvider>
     </html>
   )
 }
