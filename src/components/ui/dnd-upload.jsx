@@ -8,7 +8,7 @@ import { useRef, useState } from 'react'
 import toast from 'react-hot-toast'
 import { Button } from './button'
 
-const DnDUpload = ({ setUploadURL, icon, label, buttonLabel, className, ...rest }) => {
+const DnDUpload = ({ setUploadURL, icon, label, buttonLabel, className, cb, ...rest }) => {
   const [file, setfile] = useState(null)
   const inputBtnRef = useRef(null)
 
@@ -48,6 +48,7 @@ const DnDUpload = ({ setUploadURL, icon, label, buttonLabel, className, ...rest 
       if (response?.data?.status) {
         toast.success('File uploaded successfully!')
         setUploadURL(response?.data?.uploadedUrl)
+        cb(response?.data?.uploadedUrl)
       }
     } catch (error) {
       console.error('Error uploading file', error)
