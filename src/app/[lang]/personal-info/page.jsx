@@ -29,7 +29,7 @@ export default function PersonalInfoPage() {
   const [phone_number, setphone_number] = useState('')
   const [bio, setbio] = useState('')
 
-  const { data } = useGetPersonalInfoQuery()
+  const { data, refetch } = useGetPersonalInfoQuery()
 
   useEffect(() => {
     const personalInfo = data?.data?.user?.personal_info
@@ -50,14 +50,14 @@ export default function PersonalInfoPage() {
     updateProfile(allData)
   }
 
-  const [open, setopen] = useState(true)
+  const [open, setopen] = useState(false)
 
   useEffect(() => {
     if (isSuccess) {
       toast.success('Profile updated successfully!')
-      if (data?.data?.cardLength === 0) {
-        setopen(true)
-      }
+      //if (data?.data?.cardLength === 0) {
+      setopen(true)
+      //}
     }
     if (isError) toast.error(rtkErrorMesage(error))
   }, [isSuccess, isError, error])

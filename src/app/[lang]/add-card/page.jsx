@@ -6,10 +6,10 @@ import DisplayTab from '@/components/pages/add-card/Tabs/Display'
 import { Tabs, TabsList, TabsTrigger } from '@/components/ui/tabs'
 import Typography from '@/components/ui/typography'
 import { useCreateEmptyCardMutation } from '@/redux/features/cardsApi'
-import { resetCardTexts, setCardId } from '@/redux/features/slices/tempCardSlice'
+import { setCardId } from '@/redux/features/slices/tempCardSlice'
 import { useUpdatePersoanlInfoMutation } from '@/redux/features/usersApi'
 import { rtkErrorMesage } from '@/utils/error/errorMessage'
-import { deleteCookie, getCookie, setCookie } from 'cookies-next'
+import { getCookie, setCookie } from 'cookies-next'
 import { X } from 'lucide-react'
 import { useEffect } from 'react'
 import toast from 'react-hot-toast'
@@ -38,9 +38,9 @@ export default function AddCardPage() {
   useEffect(() => {
     if (isCardSuccess) {
       toast.success('Card created successfully!')
-      deleteCookie('cardId')
-      dispatch(setCardId(''))
-      dispatch(resetCardTexts())
+      // deleteCookie('cardId')
+      // dispatch(setCardId(''))
+      // dispatch(resetCardTexts())
     }
 
     if (isCardError) toast.error(rtkErrorMesage(cardError))

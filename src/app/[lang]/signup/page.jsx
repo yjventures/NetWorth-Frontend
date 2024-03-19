@@ -41,7 +41,7 @@ export default function SignupPage() {
 
   useEffect(() => {
     if (isSuccess) {
-      toast.success('Signup successfully!')
+      toast.success('Sent OTP to your email!')
       push(`/signup/verify?email=${getValues('email')}`)
     }
     if (isError) toast.error(rtkErrorMesage(error))
