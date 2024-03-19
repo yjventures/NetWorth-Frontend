@@ -50,7 +50,7 @@ export default function LoginVerifyPage() {
             setopen(true)
           }
         } else {
-          push('/signup/personal-info')
+          push('/personal-info')
         }
       }
     }
