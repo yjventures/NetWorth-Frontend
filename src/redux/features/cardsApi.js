@@ -8,8 +8,21 @@ const cardsApi = api.injectEndpoints({
         method: 'POST',
         body: payload
       })
+    }),
+    createEmptyCard: build.mutation({
+      query: () => ({
+        url: '/user/card',
+        method: 'POST'
+      })
+    }),
+    updateCard: build.mutation({
+      query: ({ payload, id }) => ({
+        url: `/user/card/${id}`,
+        method: 'PUT',
+        body: payload
+      })
     })
   })
 })
 
-export const { useOCRMutation } = cardsApi
+export const { useOCRMutation, useCreateEmptyCardMutation, useUpdateCardMutation } = cardsApi
