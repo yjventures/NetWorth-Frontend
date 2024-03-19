@@ -50,7 +50,7 @@ export default function PersonalInfoPage() {
     updateProfile(allData)
   }
 
-  const [open, setopen] = useState(false)
+  const [open, setopen] = useState(true)
 
   useEffect(() => {
     if (isSuccess) {

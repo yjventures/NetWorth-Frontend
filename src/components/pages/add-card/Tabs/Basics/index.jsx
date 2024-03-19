@@ -7,8 +7,10 @@ export default function BasicsTab() {
   return (
     <TabsContent value='basics'>
       <DrgaggableTextContainer />
-      <CardNameNType />
-      <DragInputs />
+      <div className='max-h-[52vh] overflow-y-auto mt-5'>
+        <CardNameNType />
+        <DragInputs />
+      </div>
     </TabsContent>
   )
 }
