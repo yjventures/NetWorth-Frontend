@@ -1,3 +1,4 @@
+import { CARD_COLORS } from '@/configs/common'
 import { createSlice } from '@reduxjs/toolkit'
 
 const initialState = {
@@ -7,7 +8,7 @@ const initialState = {
     card_name: '',
     address: '',
     design: 'linear',
-    color: '',
+    color: CARD_COLORS[0].color,
     profile_image: '',
     cover_image: '',
     name: '',

@@ -6,10 +6,13 @@ import { Img } from '@/components/ui/img'
 import { CARD_COLORS } from '@/configs/common'
 import { setCardDetails } from '@/redux/features/slices/tempCardSlice'
 import { useRef } from 'react'
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { ColorButton } from './ColorButton'
 
-export default function ColorSelector({ color: selectedColor, setcolor }) {
+export default function ColorSelector() {
+  const {
+    cardDetails: { color }
+  } = useSelector(state => state.tempCard)
   const dispatch = useDispatch()
   const colorWheelRef = useRef(null)
   return (
@@ -17,9 +20,8 @@ export default function ColorSelector({ color: selectedColor, setcolor }) {
       <div className='flex items-center justify-between pr-1'>
         <input
           type='color'
-          value={selectedColor}
+          value={color}
           onChange={e => {
-            setcolor(e.target.value)
             dispatch(setCardDetails({ color: e.target.value }))
           }}
           ref={colorWheelRef}
@@ -27,15 +29,14 @@ export default function ColorSelector({ color: selectedColor, setcolor }) {
         />
         <Img src={colorWheel} alt='color wheel' className='size-9' onClick={() => colorWheelRef.current.click()} />
 
-        {CARD_COLORS.map(color => (
+        {CARD_COLORS.map(col => (
           <ColorButton
-            key={color.id}
-            color={color.color}
-            outline={color.outline}
-            selected={color.color === selectedColor}
+            key={col.id}
+            color={col.color}
+            outline={col.outline}
+            selected={col.color === color}
             onClick={() => {
-              setcolor(color.color)
-              dispatch(setCardDetails({ color: color.color }))
+              dispatch(setCardDetails({ color: col.color }))
             }}
           />
         ))}

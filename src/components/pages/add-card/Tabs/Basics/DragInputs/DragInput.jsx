@@ -10,7 +10,7 @@ export default function DragInput({ val, multiple = false, textarea, ...rest }) 
   const handleDrop = e => {
     e.preventDefault()
     const text = e.dataTransfer.getData('text')
-    dispatch(setCardDetails({ [val]: multiple ? text : [text] }))
+    dispatch(setCardDetails({ [val]: multiple ? [text] : text }))
   }
 
   const handleDragOver = e => {
