@@ -10,6 +10,7 @@ import { getCookie } from 'cookies-next'
 
 export default function PortfolioItems() {
   const { data } = useGetActivitiesQuery(getCookie('cardId'))
+  console.log(data)
   return (
     <section>
       <SingleAccordion label='Portfolio Items' value='portfolio'>

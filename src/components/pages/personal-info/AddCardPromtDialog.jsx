@@ -17,9 +17,10 @@ import { Img } from '@/components/ui/img'
 import Overlay from '@/components/ui/overlay'
 import { API_URL } from '@/configs'
 import usePush from '@/hooks/usePush'
-import { useOCRMutation } from '@/redux/features/cardsApi'
-import { setCardTexts } from '@/redux/features/slices/tempCardSlice'
+import { useCreateEmptyCardMutation, useOCRMutation } from '@/redux/features/cardsApi'
+import { setCardId, setCardTexts } from '@/redux/features/slices/tempCardSlice'
 import axios from 'axios'
+import { setCookie } from 'cookies-next'
 import { useEffect, useRef } from 'react'
 import toast from 'react-hot-toast'
 import { useDispatch } from 'react-redux'
@@ -30,6 +31,8 @@ export default function AddCardPromtDialog({ open, setopen }) {
   const cameraInputRef = useRef(null)
 
   const [scanCard, { isLoading, isSuccess, isError, error, data }] = useOCRMutation()
+  const [createEmptyCard, { isSuccess: isCardSuccess, data: cardData, isError: isCardError, error: cardError }] =
+    useCreateEmptyCardMutation()
 
   const handleImageChange = e => {
     const files = e.target.files
@@ -64,10 +67,20 @@ export default function AddCardPromtDialog({ open, setopen }) {
       setopen(false)
       toast.success('Card Scanned Successfully!')
       dispatch(setCardTexts(data?.data?.form_text))
-      push('/add-card')
+      createEmptyCard()
     }
     if (isError) toast.error(rtkErrorMesage(error))
   }, [isSuccess, isError, error])
+
+  useEffect(() => {
+    if (isCardSuccess) {
+      toast.success('Card intialization successfull!')
+      push('/add-card')
+      setCookie('cardId', cardData?.data?._id)
+      dispatch(setCardId(cardData?.data?._id))
+    }
+    if (isCardError) toast.error(rtkErrorMesage(cardError))
+  }, [isCardSuccess, isCardError, cardError, dispatch, push])
 
   return (
     <>
