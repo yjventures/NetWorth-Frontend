@@ -42,7 +42,7 @@ export default function AddCardPage() {
 
       <Tabs defaultValue='display'>
         <div className='flex justify-center pt-5'>
-          <TabsList className=''>
+          <TabsList>
             <TabsTrigger value='display'>Display</TabsTrigger>
             <TabsTrigger value='basics'>Basics</TabsTrigger>
             <TabsTrigger value='advanced'>Advanced</TabsTrigger>

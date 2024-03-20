@@ -46,7 +46,7 @@ export default function AddActivityPage() {
     if (isSuccess) {
       toast.success('Added activity successfully!')
       if (from === 'add-card') {
-        push('/add-card')
+        push('/cards/add')
       }
     }
     if (isError) toast.error(rtkErrorMesage(error))
