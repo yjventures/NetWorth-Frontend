@@ -51,7 +51,7 @@ const DndMultipleUpload = ({ setUploadURL, icon, label, className, buttonLabel, 
 
       const uploadedUrls = responses.map(response => response?.data?.uploadedUrl)
       setUploadURL(uploadedUrls)
-      cb(response?.data?.uploadedUrl)
+      cb(uploadedUrls)
       toast.success('Files uploaded successfully!')
     } catch (error) {
       console.error('Error uploading files', error)

@@ -75,7 +75,7 @@ export default function AddCardPromtDialog({ open, setopen }) {
   useEffect(() => {
     if (isCardSuccess) {
       toast.success('Card intialization successfull!')
-      push('/add-card')
+      push('/cards/add')
       setCookie('cardId', cardData?.data?._id)
       dispatch(setCardId(cardData?.data?._id))
     }
