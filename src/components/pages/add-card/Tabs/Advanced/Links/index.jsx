@@ -9,12 +9,12 @@ import AddLinkModal from './AddLinkModal'
 import SingleLink from './SingleLink'
 
 export const SOCIAL_PLATFORMS = [
-  { id: 1, platform: 'Facebook', icon: <Facebook className='size-4' /> },
-  { id: 2, platform: 'Instagram', icon: <Instagram className='size-4' /> },
-  { id: 3, platform: 'X', icon: <Twitter className='size-4' /> },
-  { id: 4, platform: 'Github', icon: <Github className='size-4' /> },
-  { id: 5, platform: 'LinkedIn', icon: <Linkedin className='size-4' /> },
-  { id: 6, platform: 'Website', icon: <Globe className='size-4' /> }
+  { id: 1, platform: 'Facebook', icon: <Facebook className='size-4' />, prefilledLink: 'https://facebook.com/' },
+  { id: 2, platform: 'Instagram', icon: <Instagram className='size-4' />, prefilledLink: 'https://instagram.com/' },
+  { id: 3, platform: 'X', icon: <Twitter className='size-4' />, prefilledLink: 'https://x.com/' },
+  { id: 4, platform: 'Github', icon: <Github className='size-4' />, prefilledLink: 'https://github.com/' },
+  { id: 5, platform: 'LinkedIn', icon: <Linkedin className='size-4' />, prefilledLink: 'https://linkedin.com/in/' },
+  { id: 6, platform: 'Website', icon: <Globe className='size-4' />, prefilledLink: 'https://' }
 ]
 
 export default function Links() {

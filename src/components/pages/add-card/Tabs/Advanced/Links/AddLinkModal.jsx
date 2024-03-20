@@ -10,7 +10,7 @@ import { useEffect, useState } from 'react'
 import toast from 'react-hot-toast'
 
 export default function AddLinkModal({ platform }) {
-  const [link, setlink] = useState('')
+  const [link, setlink] = useState(platform.prefilledLink)
   const [open, setopen] = useState(false)
   const [addLink, { isSuccess, isError, error }] = useCreateLinkMutation()
 
