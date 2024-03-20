@@ -10,7 +10,6 @@ import { getCookie } from 'cookies-next'
 
 export default function PortfolioItems() {
   const { data, isSuccess } = useGetActivitiesQuery(getCookie('cardId'))
-  console.log(data?.data)
   return (
     <section>
       <SingleAccordion label='Portfolio Items' value='portfolio'>
@@ -35,7 +34,7 @@ export default function PortfolioItems() {
                   className='max-w-sm mx-auto aspect-video object-cover'
                 />
                 <p className='text-xl pb-5 text-white'>{activity?.name}</p>
-                <LLink href={`/activities/`} className='w-full'>
+                <LLink href={`/activities/${activity?._id}`} className='w-full'>
                   <Button className='w-full  bg-secondary-foreground rounded-md'>View Details</Button>
                 </LLink>
               </div>
