@@ -10,6 +10,7 @@ import LLink from '@/components/ui/llink'
 import { Textarea } from '@/components/ui/textarea'
 import Typography from '@/components/ui/typography'
 import { useGetPersonalInfoQuery, useUpdatePersoanlInfoMutation } from '@/redux/features/usersApi'
+import { setMaxDate } from '@/utils/date/setMaxDate'
 import { rtkErrorMesage } from '@/utils/error/errorMessage'
 import { ChevronLeft, FilePenLine, PlusCircle } from 'lucide-react'
 import { useEffect, useState } from 'react'
@@ -118,9 +119,10 @@ export default function PersonalInfoPage() {
                 id='date_of_birth'
                 name='date_of_birth'
                 type='date'
-                placeholder='Designation'
+                placeholder='Date of birth'
                 register={register}
                 errors={errors}
+                max={setMaxDate(18)}
               />
             </div>
             <Button type='submit' className='w-full'>

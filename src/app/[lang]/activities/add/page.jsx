@@ -11,6 +11,7 @@ import { Textarea } from '@/components/ui/textarea'
 import Typography from '@/components/ui/typography'
 import usePush from '@/hooks/usePush'
 import { useCreateActivityMutation } from '@/redux/features/activitiesApi'
+import { setMaxDate } from '@/utils/date/setMaxDate'
 import { rtkErrorMesage } from '@/utils/error/errorMessage'
 import { getCookie } from 'cookies-next'
 import { ChevronLeft, X } from 'lucide-react'
@@ -97,6 +98,7 @@ export default function AddActivityPage() {
           register={register}
           errors={errors}
           label='Start Date'
+          max={setMaxDate()}
           required
         />
         <Label className='mb-2 inline-block' htmlFor='end_date'>
@@ -108,6 +110,7 @@ export default function AddActivityPage() {
           register={register}
           errors={errors}
           label='Start Date'
+          max={setMaxDate()}
           disabled={currently_ongoing}
         />
         <div className='flex items-center space-x-2 mt-3 mb-8'>

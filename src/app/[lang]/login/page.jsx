@@ -40,14 +40,6 @@ export default function LoginPage() {
     login(data)
   }
 
-  // useEffect(() => {
-  //   if (isSuccess) {
-  //     toast.success('Sent OTP to your email!')
-  //     push(`/login/verify?email=${email || getValues('email')}&rememberMe=${rememberMe}`)
-  //   }
-  //   if (isError) toast.error(rtkErrorMesage(error))
-  // }, [isSuccess, isError, error, email, getValues, push, rememberMe])
-
   useEffect(() => {
     if (isSuccess) {
       if (data?.status) {
