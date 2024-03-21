@@ -9,8 +9,8 @@ export default function AdminTopNav({ user }) {
   const { navbarOpen } = useSelector(state => state.admin)
   const dispatch = useDispatch()
   return (
-    <nav className='fixed top-0 left-0 lg:left-[230px] w-full lg:w-[calc(100%_-_230px)] h-20 flex items-center justify-end md:justify-between p-7 gap-5 bg-white z-50 border-b'>
-      <div className='hidden md:flex items-center gap-2 w-1/2 max-w-96 p-2'>
+    <nav className='fixed top-0 left-0 lg:left-[230px] w-full lg:w-[calc(100%_-_230px)] h-20 flex items-center justify-end md:justify-between p-7 gap-5 bg-gray-100 z-50 border-b'>
+      <div className='hidden md:flex items-center gap-2 w-1/2 max-w-96 p-2 bg-white rounded-full border'>
         <label htmlFor='search'>
           <Search />
         </label>

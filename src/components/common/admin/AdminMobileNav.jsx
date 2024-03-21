@@ -41,11 +41,11 @@ export default function AdminMobileNav({ user }) {
     >
       <div className='flex flex-col items-center justify-center w-full'>
         <div className='flex items-center justify-between gap-4 mb-5'>
-          <LLink href='/' className='font-medium tracking-widest text-white'>
+          <LLink href='/' className='font-medium text-lg tracking-[3px] text-white'>
             NET WORTH
           </LLink>
           <X
-            className='text-white cursor-pointer w-8 h-8'
+            className='text-white cursor-pointer size-7'
             strokeWidth={1.5}
             onClick={() => dispatch(setNavbar(false))}
           />

@@ -114,11 +114,11 @@ export default function UsersPage() {
                   </TableCell>
                   <TableCell>
                     {user?.is_verified ? (
-                      <p className='text-emerald-700 bg-emerald-100 px-4 py-2 rounded-lg inline-block font-medium'>
+                      <p className='text-emerald-700 bg-emerald-100 px-3 py-1.5 rounded-lg inline-block font-medium'>
                         Verified
                       </p>
                     ) : (
-                      <p className='text-red-700 bg-red-100 px-4 py-2 rounded-lg inline-block font-medium'>
+                      <p className='text-red-700 bg-red-100 px-3 py-1.5 rounded-lg inline-block font-medium'>
                         Unverified
                       </p>
                     )}
@@ -138,29 +138,31 @@ export default function UsersPage() {
             </TableBody>
           </Table>
           <div className='w-full flex flex-wrap items-center justify-between gap-2 p-3 bg-gray-50 mb-20'>
-            <p className='text-sm font-medium'>Total Users: {data?.metadata?.totalUsers}</p>
+            <p className='text-sm font-medium'>Total Users: {data?.metaData?.totalUser}</p>
 
-            <div className='flex items-center gap-2'>
-              <p className='text-sm'>
-                Page {data?.metadata?.currentPage} / {data?.metadata?.totalPage}
+            <div className='flex items-center flex-wrap gap-2'>
+              <p className='text-sm min-w-max'>
+                Page {data?.metaData?.currentPage} / {data?.metaData?.totalPages}
               </p>
-              <Button
-                className='flex items-center gap-1 pl-3 pr-5 py-2 rounded-lg h-10 w-auto disabled:cursor-not-allowed'
-                variant='outline'
-                onClick={() => setparams({ ...params, page: params.page - 1 })}
-                disabled={params.page === 1}
-              >
-                <ChevronLeft className='size-5' /> Prev
-              </Button>
-              <Button
-                className='flex items-center gap-1 pl-5 pr-3 py-2 h-10 rounded-lg w-auto  disabled:cursor-not-allowed'
-                variant='outline'
-                disabled={params.page === data?.metadata?.totalPage}
-                onClick={() => setparams({ ...params, page: params.page + 1 })}
-              >
-                Next
-                <ChevronRight className='size-5' />
-              </Button>
+              <div className='flex items-center gap-2'>
+                <Button
+                  className='flex items-center gap-1 pl-3 pr-5 py-2 rounded-lg h-10 w-auto disabled:cursor-not-allowed'
+                  variant='outline'
+                  onClick={() => setparams({ ...params, page: params.page - 1 })}
+                  disabled={params.page === 1}
+                >
+                  <ChevronLeft className='size-5' /> Prev
+                </Button>
+                <Button
+                  className='flex items-center gap-1 pl-5 pr-3 py-2 h-10 rounded-lg w-auto  disabled:cursor-not-allowed'
+                  variant='outline'
+                  disabled={params.page === data?.metaData?.totalPages}
+                  onClick={() => setparams({ ...params, page: params.page + 1 })}
+                >
+                  Next
+                  <ChevronRight className='size-5' />
+                </Button>
+              </div>
             </div>
           </div>
         </>

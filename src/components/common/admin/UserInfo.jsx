@@ -15,7 +15,9 @@ export default function UserInfo({ user, className, darkBg }) {
       )}
       <div className={cn('flex flex-col', { 'text-white': darkBg })}>
         <p className='text-sm'>{userData?.name}</p>
-        <p className='text-xs text-text-primary-muted'>{role?.slice(0, 1)?.toUpperCase() + role?.slice(1)}</p>
+        <p className='text-xs text-text-primary-muted'>
+          {role ? role?.slice(0, 1)?.toUpperCase() + role?.slice(1) : null}
+        </p>
       </div>
       <ChevronDown className={cn('w-4.5 h-4.5 text-secondary-foreground', { 'text-white': darkBg })} />
     </div>

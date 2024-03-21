@@ -27,7 +27,7 @@ export default function AdminSideNav() {
   return (
     <nav className='fixed top-0 left-0 w-[230px] bg-gray-800 h-screen hidden lg:flex flex-col items-center justify-between p-5'>
       <div className='flex flex-col items-center justify-center w-full'>
-        <LLink href='/' className='mb-5 font-medium tracking-widest text-white'>
+        <LLink href='/' className='mb-5 font-medium tracking-[3px] text-lg text-white'>
           NET WORTH
         </LLink>
 
