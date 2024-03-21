@@ -28,7 +28,7 @@ export default function AdminLoginPage() {
   useEffect(() => {
     if (isSuccess) {
       toast.success('Logged in successfully!')
-      push('/admin')
+      push('/admin/users')
     }
     if (isError) toast.error(rtkErrorMesage(error))
   }, [isSuccess, isError, error, push])
