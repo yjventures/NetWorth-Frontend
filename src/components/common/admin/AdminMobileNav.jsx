@@ -12,8 +12,9 @@ import { X } from 'lucide-react'
 import { usePathname } from 'next/navigation'
 import toast from 'react-hot-toast'
 import { useDispatch, useSelector } from 'react-redux'
+import UserInfo from './UserInfo'
 
-export default function AdminMobileNav() {
+export default function AdminMobileNav({ user }) {
   const push = usePush()
   const pathname = usePathname()
   const { navbarOpen } = useSelector(state => state.admin)
@@ -48,6 +49,8 @@ export default function AdminMobileNav() {
             onClick={() => dispatch(setNavbar(false))}
           />
         </div>
+
+        <UserInfo user={user} className='flex md:hidden mb-5' darkBg />
 
         <ul className='flex flex-col items-center w-full px-2'>
           {adminNavLinks.map(link => (
