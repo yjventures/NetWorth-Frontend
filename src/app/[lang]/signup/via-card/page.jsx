@@ -27,7 +27,6 @@ export default function SignUpViaCardPage() {
     register,
     watch,
     handleSubmit,
-    getValues,
     formState: { errors }
   } = useForm()
 

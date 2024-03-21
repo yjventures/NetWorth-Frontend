@@ -30,7 +30,7 @@ export default function PersonalInfoPage() {
   const [phone_number, setphone_number] = useState('')
   const [bio, setbio] = useState('')
 
-  const { data, refetch } = useGetPersonalInfoQuery()
+  const { data } = useGetPersonalInfoQuery()
 
   useEffect(() => {
     const personalInfo = data?.data?.user?.personal_info

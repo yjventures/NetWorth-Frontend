@@ -15,7 +15,7 @@ import { useOCRMutation } from '@/redux/features/cardsApi'
 import { setCardTexts } from '@/redux/features/slices/tempCardSlice'
 import { rtkErrorMesage } from '@/utils/error/errorMessage'
 import axios from 'axios'
-import { useEffect, useRef } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import toast from 'react-hot-toast'
 import { useDispatch } from 'react-redux'
 import { Pagination } from 'swiper/modules'
@@ -27,6 +27,8 @@ export default function Home() {
   const cameraInputRef = useRef(null)
 
   const [scanCard, { isLoading, isSuccess, isError, error, data }] = useOCRMutation()
+
+  const [isUploading, setisUploading] = useState(false)
 
   const handleImageChange = e => {
     const files = e.target.files
@@ -40,6 +42,7 @@ export default function Home() {
     formData.append('file', file)
 
     try {
+      setisUploading(true)
       toast.success('Uploading file, please wait...')
       const response = await axios.post(`${API_URL}/upload`, formData, {
         headers: {
@@ -48,10 +51,11 @@ export default function Home() {
       })
 
       if (response?.data?.status) {
-        toast.success('File uploaded successfully!')
         scanCard({ imageUrl: response?.data?.uploadedUrl })
+        setisUploading(false)
       }
     } catch (error) {
+      setisUploading(false)
       console.error('Error uploading file', error)
     }
   }
@@ -126,7 +130,7 @@ export default function Home() {
           </div>
         </SwiperSlide>
       </Swiper>
-      <Overlay isOpen={isLoading} animationData={animationData} />
+      <Overlay isOpen={isUploading || isLoading} animationData={animationData} />
     </main>
   )
 }

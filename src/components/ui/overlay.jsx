@@ -6,7 +6,7 @@ export default function Overlay({ isOpen, animationData }) {
   return (
     <div
       className={cn(
-        'w-full min-h-screen flex items-center justify-center fixed left-0 top-0 backdrop-blur-md z-[100]',
+        'w-full min-h-screen flex items-center justify-center fixed left-0 top-0 backdrop-blur-md z-[100] bg-white/5',
         {
           hidden: !isOpen
         }

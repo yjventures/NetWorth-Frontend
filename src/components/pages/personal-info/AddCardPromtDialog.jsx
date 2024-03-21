@@ -21,7 +21,7 @@ import { useCreateEmptyCardMutation, useOCRMutation } from '@/redux/features/car
 import { setCardId, setCardTexts } from '@/redux/features/slices/tempCardSlice'
 import axios from 'axios'
 import { setCookie } from 'cookies-next'
-import { useEffect, useRef } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import toast from 'react-hot-toast'
 import { useDispatch } from 'react-redux'
 
@@ -31,6 +31,9 @@ export default function AddCardPromtDialog({ open, setopen }) {
   const cameraInputRef = useRef(null)
 
   const [scanCard, { isLoading, isSuccess, isError, error, data }] = useOCRMutation()
+
+  const [isUploading, setisUploading] = useState(false)
+
   const [createEmptyCard, { isSuccess: isCardSuccess, data: cardData, isError: isCardError, error: cardError }] =
     useCreateEmptyCardMutation()
 
@@ -46,7 +49,7 @@ export default function AddCardPromtDialog({ open, setopen }) {
     formData.append('file', file)
 
     try {
-      toast.success('Uploading file, please wait...')
+      setisUploading(true)
       const response = await axios.post(`${API_URL}/upload`, formData, {
         headers: {
           'Content-Type': 'multipart/form-data'
@@ -54,10 +57,11 @@ export default function AddCardPromtDialog({ open, setopen }) {
       })
 
       if (response?.data?.status) {
-        toast.success('File uploaded successfully!')
         scanCard({ imageUrl: response?.data?.uploadedUrl })
+        setisUploading(false)
       }
     } catch (error) {
+      setisUploading(false)
       console.error('Error uploading file', error)
     }
   }
@@ -118,7 +122,7 @@ export default function AddCardPromtDialog({ open, setopen }) {
           </DialogFooter>
         </DialogContent>
       </Dialog>
-      <Overlay isOpen={isLoading} animationData={animationData} />
+      <Overlay isOpen={isUploading || isLoading} animationData={animationData} />
     </>
   )
 }
