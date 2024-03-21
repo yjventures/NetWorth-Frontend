@@ -1,5 +1,6 @@
 'use client'
 
+import { AdminBreadcrumb } from '@/components/common/admin/AdminBreadcrumb'
 import SortingSigns from '@/components/common/admin/SortingSigns'
 import { Button } from '@/components/ui/button'
 import ConfirmationPrompt from '@/components/ui/confirmation-prompt'
@@ -13,6 +14,8 @@ import { rtkErrorMesage } from '@/utils/error/errorMessage'
 import { ChevronLeft, ChevronRight, Trash2 } from 'lucide-react'
 import { useEffect, useState } from 'react'
 import toast from 'react-hot-toast'
+
+const pages = [{ id: 1, label: 'Users', href: '/admin/users', active: true }]
 
 export default function UsersPage() {
   const [params, setparams] = useState({
@@ -37,7 +40,8 @@ export default function UsersPage() {
 
   return (
     <div>
-      <Typography variant='h1' className='font-medium mt-3 mb-6'>
+      <AdminBreadcrumb pages={pages} />
+      <Typography variant='h2' className='font-medium mt-3 mb-6'>
         Users
       </Typography>
       {isLoading ? (

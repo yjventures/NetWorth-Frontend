@@ -112,7 +112,6 @@ export default function PersonalInfoPage() {
               register={register}
               errors={errors}
             />
-            <Input name='designation' placeholder='Designation' register={register} errors={errors} />
             <div className='space-y-1'>
               <Label htmlFor='date_of_birth'>Date of Birth</Label>
               <Input
