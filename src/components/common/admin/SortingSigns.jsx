@@ -6,9 +6,15 @@ export default function SortingSigns({ params, setparams, sortField }) {
       {params.sortBy === sortField ? (
         <>
           {params.sortOrder === 'asc' ? (
-            <ArrowUp className='w-4 h-4 cursor-pointer' onClick={() => setparams({ ...params, sortOrder: 'desc' })} />
+            <ArrowUp
+              className='w-4 h-4 cursor-pointer'
+              onClick={() => setparams({ ...params, sortBy: sortField, sortOrder: 'desc' })}
+            />
           ) : (
-            <ArrowDown className='w-4 h-4 cursor-pointer' onClick={() => setparams({ ...params, sortOrder: 'asc' })} />
+            <ArrowDown
+              className='w-4 h-4 cursor-pointer'
+              onClick={() => setparams({ ...params, sortBy: sortField, sortOrder: 'asc' })}
+            />
           )}
         </>
       ) : (

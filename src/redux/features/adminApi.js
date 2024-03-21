@@ -12,8 +12,9 @@ const adminApi = api.injectEndpoints({
       })
     }),
     getAllUsers: build.query({
-      query: () => ({
-        url: `${rootApi}/users`
+      query: params => ({
+        url: `${rootApi}/users`,
+        params
       }),
       providesTags: ['users']
     }),

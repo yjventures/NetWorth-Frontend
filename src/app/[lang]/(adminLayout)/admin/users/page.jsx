@@ -5,28 +5,31 @@ import SortingSigns from '@/components/common/admin/SortingSigns'
 import { Button } from '@/components/ui/button'
 import ConfirmationPrompt from '@/components/ui/confirmation-prompt'
 import { Img } from '@/components/ui/img'
+import { SimpleInput } from '@/components/ui/simple-input'
 import { Skeleton } from '@/components/ui/skeleton'
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table'
 import Typography from '@/components/ui/typography'
+import useDebounce from '@/hooks/useDebounce'
 import { useDeleteUserMutation, useGetAllUsersQuery } from '@/redux/features/adminApi'
 import { convertDateStr } from '@/utils/date/convertDateStr'
 import { rtkErrorMesage } from '@/utils/error/errorMessage'
-import { ChevronLeft, ChevronRight, Trash2 } from 'lucide-react'
+import { ChevronLeft, ChevronRight, Search, Trash2 } from 'lucide-react'
 import { useEffect, useState } from 'react'
 import toast from 'react-hot-toast'
 
 const pages = [{ id: 1, label: 'Users', href: '/admin/users', active: true }]
 
 export default function UsersPage() {
+  const [search, setsearch] = useState('')
+  const debouncedVal = useDebounce(search, 750)
   const [params, setparams] = useState({
-    search: '',
     page: 1,
     limit: 10,
     sortBy: 'name',
     sortOrder: 'asc'
   })
 
-  const { data, isLoading, isSuccess } = useGetAllUsersQuery()
+  const { data, isLoading, isSuccess } = useGetAllUsersQuery({ ...params, search: debouncedVal })
 
   const [openPrompt, setopenPrompt] = useState(false)
   const [deleteId, setdeleteId] = useState('')
@@ -41,8 +44,8 @@ export default function UsersPage() {
   return (
     <div>
       <AdminBreadcrumb pages={pages} />
-      <Typography variant='h2' className='font-medium mt-3 mb-6'>
-        Users
+      <Typography variant='h2' className='font-normal mt-5 mb-8'>
+        All Users
       </Typography>
       {isLoading ? (
         <div className='flex flex-col gap-2'>
@@ -53,6 +56,13 @@ export default function UsersPage() {
       ) : null}
       {isSuccess ? (
         <>
+          <SimpleInput
+            value={search}
+            onChange={e => setsearch(e.target.value)}
+            placeholder='Search by name or email...'
+            className='mb-2 max-w-sm h-11'
+            icon={<Search />}
+          />
           <Table className='w-full'>
             <TableHeader className='bg-neutral-50 h-16 text-text-primary-muted'>
               <TableRow>
@@ -68,7 +78,7 @@ export default function UsersPage() {
                 </TableHead>
                 <TableHead>
                   <p className='flex items-center gap-2'>
-                    Verified <SortingSigns params={params} setparams={setparams} sortField='is_Verified' />
+                    Verified <SortingSigns params={params} setparams={setparams} sortField='is_verified' />
                   </p>
                 </TableHead>
                 <TableHead>
@@ -127,7 +137,7 @@ export default function UsersPage() {
               ))}
             </TableBody>
           </Table>
-          <div className='w-full flex flex-wrap items-center justify-between gap-2 p-3 bg-gray-50'>
+          <div className='w-full flex flex-wrap items-center justify-between gap-2 p-3 bg-gray-50 mb-20'>
             <p className='text-sm font-medium'>Total Users: {data?.metadata?.totalUsers}</p>
 
             <div className='flex items-center gap-2'>
