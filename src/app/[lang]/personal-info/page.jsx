@@ -4,11 +4,13 @@ import AddBio from '@/components/pages/personal-info/AddBio'
 import AddCardPromtDialog from '@/components/pages/personal-info/AddCardPromtDialog'
 import ProfilePhotoUploadComponent from '@/components/pages/personal-info/ProfilePhotoUploadComponent'
 import { Button } from '@/components/ui/button'
+import ConfirmationPrompt from '@/components/ui/confirmation-prompt'
 import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
 import LLink from '@/components/ui/llink'
 import { Textarea } from '@/components/ui/textarea'
 import Typography from '@/components/ui/typography'
+import usePush from '@/hooks/usePush'
 import { useGetPersonalInfoQuery, useUpdatePersoanlInfoMutation } from '@/redux/features/usersApi'
 import { setMaxDate } from '@/utils/date/setMaxDate'
 import { rtkErrorMesage } from '@/utils/error/errorMessage'
@@ -17,8 +19,10 @@ import { useEffect, useState } from 'react'
 import { useForm } from 'react-hook-form'
 import toast from 'react-hot-toast'
 import PhoneInput from 'react-phone-input-2'
+import { useSelector } from 'react-redux'
 
 export default function PersonalInfoPage() {
+  const push = usePush()
   const {
     register,
     handleSubmit,
@@ -46,6 +50,10 @@ export default function PersonalInfoPage() {
 
   const [updateProfile, { isSuccess, isError, error }] = useUpdatePersoanlInfoMutation()
 
+  const { cardTexts } = useSelector(state => state.tempCard)
+
+  const [showPrompt, setshowPrompt] = useState(false)
+
   const onSubmit = data => {
     const allData = { ...data, profile_image, phone_number: phone_number ? `+${phone_number}` : '' }
     updateProfile(allData)
@@ -56,9 +64,10 @@ export default function PersonalInfoPage() {
   useEffect(() => {
     if (isSuccess) {
       toast.success('Profile updated successfully!')
-      //if (data?.data?.cardLength === 0) {
-      setopen(true)
-      //}
+
+      if (cardTexts?.length) {
+        setshowPrompt(true)
+      }
     }
     if (isError) toast.error(rtkErrorMesage(error))
   }, [isSuccess, isError, error])
@@ -132,6 +141,13 @@ export default function PersonalInfoPage() {
         </form>
       </div>
       <AddCardPromtDialog open={open} setopen={setopen} />
+      <ConfirmationPrompt
+        title='Do you want to use the previously scanned card to add a card?'
+        open={showPrompt}
+        setopen={setshowPrompt}
+        cb={() => push('/cards/add')}
+        rejectionCb={() => setopen(true)}
+      />
     </div>
   )
 }
