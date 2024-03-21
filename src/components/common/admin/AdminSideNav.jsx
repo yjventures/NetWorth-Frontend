@@ -37,8 +37,8 @@ export default function AdminSideNav() {
               <LLink href={link.href}>
                 <button
                   className={cn(
-                    'w-full rounded-lg text-gray-light p-3 text-left hover:bg-bg-primary-secondary hover:text-text-white',
-                    { 'bg-secondary-foreground text-white': pathname.includes(link.href) }
+                    'w-full rounded-lg text-gray-light p-3 text-left hover:bg-secondary-foreground text-white/70',
+                    { 'bg-secondary-foreground text-white font-medium': pathname.includes(link.href) }
                   )}
                 >
                   {link.label}

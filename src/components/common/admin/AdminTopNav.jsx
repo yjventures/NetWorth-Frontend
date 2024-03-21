@@ -17,7 +17,7 @@ export default function AdminTopNav({ user }) {
         <input id='search' className='w-full outline-none' placeholder='Search' />
       </div>
 
-      <div className='flex items-center gap-4 w-auto md:w-full'>
+      <div className='flex items-center justify-end gap-4 w-auto md:w-full'>
         <div className='flex items-center gap-4 text-text-primary-muted'>
           <CalendarDays className='size-6' />
           <Bell className='size-6' />

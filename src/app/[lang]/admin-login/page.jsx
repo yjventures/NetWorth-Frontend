@@ -5,7 +5,9 @@ import { Input } from '@/components/ui/input'
 import Typography from '@/components/ui/typography'
 import usePush from '@/hooks/usePush'
 import { useAdminLoginMutation } from '@/redux/features/adminApi'
+import { calculateTokenExpiration } from '@/utils/auth/calculateTokenExpiration'
 import { rtkErrorMesage } from '@/utils/error/errorMessage'
+import { setCookie } from 'cookies-next'
 import { Lock, Mail } from 'lucide-react'
 import { useEffect } from 'react'
 import { useForm } from 'react-hook-form'
@@ -19,7 +21,7 @@ export default function AdminLoginPage() {
     formState: { errors }
   } = useForm()
 
-  const [login, { isSuccess, isError, error }] = useAdminLoginMutation()
+  const [login, { isSuccess, isError, error, data }] = useAdminLoginMutation()
 
   const onSubmit = data => {
     login(data)
@@ -27,7 +29,13 @@ export default function AdminLoginPage() {
 
   useEffect(() => {
     if (isSuccess) {
+      const { accessToken } = { ...data }
       toast.success('Logged in successfully!')
+      //setCookie('refreshToken', refreshToken, { maxAge: calculateTokenExpiration(refreshToken) })
+      setCookie('accessToken', accessToken, { maxAge: calculateTokenExpiration(accessToken) })
+      // setCookie('userData', JSON.stringify(userData), {
+      //   maxAge: calculateTokenExpiration(refreshToken)
+      // })
       push('/admin/users')
     }
     if (isError) toast.error(rtkErrorMesage(error))
