@@ -102,7 +102,7 @@ export default function PersonalInfoPage() {
               onChange={val => setphone_number(val)}
               enableSearch
               containerClass='text-lg bg-gray-50'
-              inputClass='block !w-full max-w-[360px] px-3.5 py-[25px] ring-inset ring-primary placeholder:text-gray-light focus:ring-inset focus:ring-bg-primary-dark sm:text-sm sm:leading-6 ring-0 !bg-transparent !border-opacity-50 rounded-2xl h-full shadow-none focus:ring-[1px] outline-none !ext-lg py-5'
+              inputClass='block !w-full px-3.5 py-[25px] ring-inset ring-primary placeholder:text-gray-light focus:ring-inset focus:ring-bg-primary-dark sm:text-sm sm:leading-6 ring-0 !bg-transparent !border-opacity-50 rounded-2xl h-full shadow-none focus:ring-[1px] outline-none !ext-lg py-5'
               buttonClass='!border-0 px-3.5 py-6 ring-inset ring-primary placeholder:text-gray-light focus:ring-inset focus:ring-bg-primary-dark sm:text-sm sm:leading-6 ring-0 !bg-transparent rounded-2xl shadow-none focus:ring outline-none'
             />
             <Textarea

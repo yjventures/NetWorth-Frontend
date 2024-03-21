@@ -8,7 +8,9 @@ import { Switch } from '@/components/ui/switch'
 import Typography from '@/components/ui/typography'
 import usePush from '@/hooks/usePush'
 import { useLoginMutation } from '@/redux/features/authApi'
+import { calculateTokenExpiration } from '@/utils/auth/calculateTokenExpiration'
 import { rtkErrorMesage } from '@/utils/error/errorMessage'
+import { setCookie } from 'cookies-next'
 import { ChevronLeft, Lock, Mail } from 'lucide-react'
 import { useSearchParams } from 'next/navigation'
 import { useEffect, useState } from 'react'
@@ -23,7 +25,6 @@ export default function LoginPage() {
     register,
     handleSubmit,
     setValue,
-    getValues,
     formState: { errors }
   } = useForm()
 
@@ -33,19 +34,50 @@ export default function LoginPage() {
 
   const [rememberMe, setrememberMe] = useState(false)
 
-  const [login, { isSuccess, isError, error }] = useLoginMutation()
+  const [login, { isSuccess, isError, data, error }] = useLoginMutation()
 
   const onSubmit = data => {
     login(data)
   }
 
+  // useEffect(() => {
+  //   if (isSuccess) {
+  //     toast.success('Sent OTP to your email!')
+  //     push(`/login/verify?email=${email || getValues('email')}&rememberMe=${rememberMe}`)
+  //   }
+  //   if (isError) toast.error(rtkErrorMesage(error))
+  // }, [isSuccess, isError, error, email, getValues, push, rememberMe])
+
   useEffect(() => {
     if (isSuccess) {
-      toast.success('Sent OTP to your email!')
-      push(`/login/verify?email=${email || getValues('email')}&rememberMe=${rememberMe}`)
+      if (data?.status) {
+        toast.success('Logged in successfully!')
+        const { accessToken, refreshToken, data: userData } = { ...data }
+        if (rememberMe === 'true') {
+          setCookie('refreshToken', refreshToken, { maxAge: calculateTokenExpiration(refreshToken) })
+          setCookie('accessToken', accessToken, { maxAge: calculateTokenExpiration(accessToken) })
+          setCookie('userData', JSON.stringify(userData), {
+            maxAge: calculateTokenExpiration(refreshToken)
+          })
+        } else {
+          setCookie('refreshToken', refreshToken)
+          setCookie('accessToken', accessToken)
+          setCookie('userData', JSON.stringify(userData))
+        }
+
+        if (userData?.personal_info?.bio) {
+          if (userData?.cards?.length) {
+            push('/')
+          } else {
+            setopen(true)
+          }
+        } else {
+          push('/personal-info')
+        }
+      }
     }
     if (isError) toast.error(rtkErrorMesage(error))
-  }, [isSuccess, isError, error, email, getValues, push, rememberMe])
+  }, [isSuccess, isError, error, rememberMe, push, data])
 
   return (
     <div className='py-10 container'>
