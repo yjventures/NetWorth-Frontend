@@ -26,7 +26,7 @@ export default function AddCardPage() {
 
   const { cardDetails, cardId } = useSelector(state => state.tempCard)
   return (
-    <div className='py-10 container overflow-x-hidden'>
+    <div className='py-10 container overflow-x-hidden max-w-md'>
       <div className='flex items-center justify-between'>
         <div className='border border-black rounded-full p-0.5'>
           <X className='size-4' strokeWidth={3} />

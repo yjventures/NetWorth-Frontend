@@ -14,6 +14,8 @@ export default function DragInputs() {
   const {
     cardDetails: { name, email, bio, designation, company_name, company_logo, phone_number, address }
   } = useSelector(state => state.tempCard)
+
+  console.log(company_logo)
   return (
     <SingleAccordion label='Personal' value='personal'>
       <div className='space-y-4'>
@@ -63,10 +65,10 @@ export default function DragInputs() {
           placeholder='Company Name'
           val='company_name'
         />
-        <Label>Company Logo</Label>
+        <Label className='pt-4 inline-block'>Company Logo</Label>
         {company_logo ? (
           <div className='flex items-center gap-5'>
-            <Img src={company_logo} alt='Profile Image' className='size-40 aspect-square object-cover' sizes='160px' />
+            <Img src={company_logo} alt='Company Logo' className='size-40 aspect-square object-cover' sizes='160px' />
             <X className='size-8 cursor-pointer' onClick={() => dispatch(setCardDetails({ company_logo: '' }))} />
           </div>
         ) : (
@@ -75,7 +77,7 @@ export default function DragInputs() {
             accept='image/*'
             label='Click add image to add your profile picture'
             buttonLabel='Select Image'
-            cb={url => dispatch(setCardDetails({ profile_image: url }))}
+            cb={url => dispatch(setCardDetails({ company_logo: url }))}
           />
         )}
       </div>

@@ -54,7 +54,7 @@ export default function AddActivityPage() {
   }, [isSuccess, isError, error, push, from])
 
   return (
-    <div className='py-10 container'>
+    <div className='py-10 container max-w-md'>
       <LLink href='/'>
         <Button variant='icon' className='shadow-sm px-3 h-10 rounded-lg'>
           <ChevronLeft className='size-6' />

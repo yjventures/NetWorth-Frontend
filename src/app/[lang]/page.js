@@ -81,33 +81,33 @@ export default function Home() {
         className='h-[90dvh]'
       >
         <SwiperSlide>
-          <div className='flex flex-col gap-20 items-center justify-center h-full'>
+          <div className='flex flex-col gap-20 items-center justify-center h-full max-w-md mx-auto'>
             <Img src={sliderImage1} alt='slider image 1' className='max-w-72' />
-            <p className='text-center text-muted-foreground'>
+            <p className='text-center text-muted-foreground text-balance'>
               Dummy text is also used to demonstrate the appearance of different typefaces and layouts
             </p>
           </div>
         </SwiperSlide>
         <SwiperSlide>
-          <div className='flex flex-col gap-20 items-center justify-center h-full'>
-            <div className='flex flex-col w-full items-center gap-5'>
+          <div className='flex flex-col gap-20 items-center justify-center h-full max-w-md mx-auto'>
+            <div className='flex flex-col w-full items-center gap-5 max-w-sm'>
               <Img src={sliderImage2_2} alt='slider image 1' className='max-w-20 self-end' />
               <Img src={sliderImage2} alt='slider image 1' className='max-w-72' />
             </div>
-            <p className='text-center text-muted-foreground'>
+            <p className='text-center text-muted-foreground text-balance'>
               Dummy text is also used to demonstrate the appearance of different typefaces and layouts
             </p>
           </div>
         </SwiperSlide>
         <SwiperSlide>
-          <div className='flex flex-col gap-5 items-center justify-center h-full'>
+          <div className='flex flex-col gap-5 items-center justify-center h-full max-w-md mx-auto'>
             <div className='flex flex-col gap-20 items-center justify-center'>
               <Img src={sliderImage3} alt='slider image 1' className='max-w-72' />
-              <p className='text-center text-muted-foreground'>
+              <p className='text-center text-muted-foreground text-balance'>
                 Dummy text is also used to demonstrate the appearance of different typefaces and layouts
               </p>
             </div>
-            <div className='w-full space-y-5'>
+            <div className='w-full space-y-5 max-w-sm'>
               <LLink href='/signup'>
                 <Button className='w-full h-14 rounded-2xl'>Sign up with email</Button>
               </LLink>

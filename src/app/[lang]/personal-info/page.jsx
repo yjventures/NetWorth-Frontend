@@ -67,6 +67,8 @@ export default function PersonalInfoPage() {
 
       if (cardTexts?.length) {
         setshowPrompt(true)
+      } else {
+        setopen(true)
       }
     }
     if (isError) toast.error(rtkErrorMesage(error))
@@ -74,7 +76,7 @@ export default function PersonalInfoPage() {
 
   return (
     <div suppressHydrationWarning>
-      <div className='py-10 container'>
+      <div className='py-10 container max-w-md'>
         <LLink href='/'>
           <Button variant='icon' className='shadow-sm px-3 h-10 rounded-lg'>
             <ChevronLeft className='size-6' />

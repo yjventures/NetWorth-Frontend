@@ -29,7 +29,7 @@ export default function SignUpEmailVerifyPage() {
   }, [isSuccess, isError, error, email, push])
 
   return (
-    <div className='py-10 container'>
+    <div className='py-10 container max-w-xl'>
       <LLink href='/'>
         <Button variant='icon' className='shadow-sm px-3 h-10 rounded-lg'>
           <ChevronLeft className='size-6' />
@@ -63,9 +63,6 @@ export default function SignUpEmailVerifyPage() {
         <Button className='w-full rounded-2xl mt-12' onClick={() => verifySignUp({ email, otp })}>
           Verify
         </Button>
-        {/* <Button className='w-full rounded-2xl' variant='tartiary'>
-          Send Again
-        </Button> */}
       </div>
     </div>
   )
