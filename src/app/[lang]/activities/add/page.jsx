@@ -21,6 +21,18 @@ import { useForm } from 'react-hook-form'
 import toast from 'react-hot-toast'
 
 export default function AddActivityPage() {
+  // Preventing users from refresing the page
+  useEffect(() => {
+    const handleBeforeUnload = event => {
+      event.preventDefault()
+    }
+
+    window.addEventListener('beforeunload', handleBeforeUnload)
+    return () => {
+      window.removeEventListener('beforeunload', handleBeforeUnload)
+    }
+  }, [])
+
   const push = usePush()
   const params = useSearchParams()
   const from = params.has('from') && params.get('from')

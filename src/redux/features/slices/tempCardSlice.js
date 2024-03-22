@@ -33,7 +33,9 @@ const tempCardSlice = createSlice({
       state.cardTexts = []
     },
     setCardDetails: (state, action) => {
-      state.cardDetails = { ...state.cardDetails, ...action.payload }
+      const allDetails = { ...state.cardDetails, ...action.payload }
+      state.cardDetails = allDetails
+      //localStorage.setItem('cardDetails', JSON.stringify(allDetails))
     },
     setCardId: (state, action) => {
       state.cardId = action.payload

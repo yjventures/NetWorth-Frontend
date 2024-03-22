@@ -14,6 +14,18 @@ import toast from 'react-hot-toast'
 import { useSelector } from 'react-redux'
 
 export default function AddCardPage() {
+  // Preventing users from refresing the page
+  useEffect(() => {
+    const handleBeforeUnload = event => {
+      event.preventDefault()
+    }
+
+    window.addEventListener('beforeunload', handleBeforeUnload)
+    return () => {
+      window.removeEventListener('beforeunload', handleBeforeUnload)
+    }
+  }, [])
+
   const [updateCard, { isSuccess, isError, error }] = useUpdatePersoanlInfoMutation()
 
   useEffect(() => {
