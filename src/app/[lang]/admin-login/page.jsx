@@ -42,7 +42,7 @@ export default function AdminLoginPage() {
   }, [isSuccess, isError, error, push])
 
   return (
-    <div className='h-dvh flex items-center justify-center container'>
+    <div className='h-dvh flex items-center justify-center container max-w-md'>
       <form onSubmit={handleSubmit(onSubmit)} className='w-full'>
         <Typography variant='h1' className='mb-10 font-normal'>
           Admin Login
