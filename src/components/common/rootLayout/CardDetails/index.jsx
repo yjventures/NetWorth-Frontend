@@ -2,6 +2,7 @@
 
 import { cn } from '@/lib/utils'
 import { useState } from 'react'
+import Activities from './Activities'
 import CardHeader from './CardHeader'
 import CardUserInfo from './CardUserInfo'
 import CondensedHeaderContent from './CondensedHeaderContent'
@@ -25,6 +26,7 @@ export default function CardDetails({ data, className }) {
             <FullviewHeaderContent data={data} />
           </CardHeader>
           <FullviewUserInfo data={data} setCondensedView={() => setview('condensed')} />
+          <Activities cardId={data?._id} />
         </>
       )}
     </section>

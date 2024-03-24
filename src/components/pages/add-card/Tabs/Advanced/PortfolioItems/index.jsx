@@ -7,6 +7,7 @@ import { Img } from '@/components/ui/img'
 import LLink from '@/components/ui/llink'
 import { useGetActivitiesQuery } from '@/redux/features/activitiesApi'
 import { getCookie } from 'cookies-next'
+import PortfolioItem from './PortfolioItem'
 
 export default function PortfolioItems() {
   const { data, isSuccess } = useGetActivitiesQuery(getCookie('cardId'))
@@ -27,17 +28,7 @@ export default function PortfolioItems() {
         {isSuccess ? (
           <div className='flex flex-col items-center justify-center gap-y-5 w-full mb-5'>
             {data?.data?.map(activity => (
-              <div key={activity?.id} className='p-5 rounded-lg shadow-md w-full space-y-3 bg-gray-800'>
-                <Img
-                  src={activity?.attachments?.[0]}
-                  alt={activity?.name}
-                  className='max-w-sm mx-auto aspect-video object-cover'
-                />
-                <p className='text-xl pb-5 text-white'>{activity?.name}</p>
-                <LLink href={`/activities/${activity?._id}`} className='w-full'>
-                  <Button className='w-full  bg-secondary-foreground rounded-md'>View Details</Button>
-                </LLink>
-              </div>
+              <PortfolioItem key={activity?._id} activity={activity} />
             ))}
           </div>
         ) : null}

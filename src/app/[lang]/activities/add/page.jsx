@@ -36,6 +36,7 @@ export default function AddActivityPage() {
   const push = usePush()
   const params = useSearchParams()
   const from = params.has('from') && params.get('from')
+  const cardId = params.has('cardId') && params.get('cardId')
 
   const {
     register,
@@ -52,6 +53,8 @@ export default function AddActivityPage() {
     const allData = { ...data, attachments, currently_ongoing }
     if (from === 'add-card') {
       createActivity({ cardId: getCookie('cardId'), payload: allData })
+    } else if (from === 'card-details') {
+      createActivity({ cardId, payload: allData })
     }
   }
 
@@ -60,10 +63,12 @@ export default function AddActivityPage() {
       toast.success('Added activity successfully!')
       if (from === 'add-card') {
         push('/cards/add')
+      } else if (from === 'card-details') {
+        push(`/cards/${cardId}`)
       }
     }
     if (isError) toast.error(rtkErrorMesage(error))
-  }, [isSuccess, isError, error, push, from])
+  }, [isSuccess, isError, error, push, from, cardId])
 
   return (
     <div className='py-10 container max-w-md'>

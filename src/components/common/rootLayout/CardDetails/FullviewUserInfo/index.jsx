@@ -3,7 +3,6 @@ import FullviewLink from './FullviewLink'
 
 export default function FullviewUserInfo({ data, setCondensedView }) {
   const webLink = data?.links?.find(l => l.platform === 'Website')?.link
-  console.log(data)
   return (
     <section className='px-5'>
       <p className='text-primary font-semibold cursor-pointer' onClick={setCondensedView}>
