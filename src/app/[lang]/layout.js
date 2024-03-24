@@ -1,4 +1,6 @@
 import ReduxProvider from '@/lib/redux/redux-provider'
+import { cn } from '@/lib/utils'
+import styles from '@/styles/common/rootLayout/rootLayout.module.scss'
 import '@/styles/globals.scss'
 import { Poppins } from 'next/font/google'
 import { Toaster } from 'react-hot-toast'
@@ -17,7 +19,7 @@ export default function RootLayout({ children }) {
     <html>
       <ReduxProvider>
         <body className={poppins.className} suppressHydrationWarning>
-          <main>{children}</main>
+          <main className={cn('min-h-screen', styles.root)}>{children}</main>
           <Toaster position='top-center' />
         </body>
       </ReduxProvider>

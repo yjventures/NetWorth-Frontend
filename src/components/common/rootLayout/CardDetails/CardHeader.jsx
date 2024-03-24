@@ -4,7 +4,7 @@ import { PlusCircle, Share } from 'lucide-react'
 
 export default function CardHeader({ data }) {
   return (
-    <div className='relative'>
+    <section className='relative'>
       <div
         className='w-full h-28 flex justify-between items-start p-4 text-white'
         style={{ backgroundColor: data?.color }}
@@ -26,6 +26,6 @@ export default function CardHeader({ data }) {
           <Img src={data?.company_logo} alt={data?.name} className='w-12 aspect-square object-cover rounded-full' />
         ) : null}
       </div>
-    </div>
+    </section>
   )
 }

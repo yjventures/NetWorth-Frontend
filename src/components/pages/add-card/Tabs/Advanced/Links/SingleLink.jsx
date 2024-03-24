@@ -1,6 +1,7 @@
 import { SOCIAL_PLATFORMS } from '.'
 
 export default function SingleLink({ platform, links }) {
+  console.log(links)
   const link = links?.find(p => p.platform === platform)
   const linkWithIcon = SOCIAL_PLATFORMS?.find(p => p.platform === platform)
   return (
