@@ -8,10 +8,11 @@ import { useGetActivitiesQuery } from '@/redux/features/activitiesApi'
 
 export default function Activities({ cardId }) {
   const { data, isSuccess } = useGetActivitiesQuery(cardId)
-  console.log(data?.data)
   return (
     <div className='px-5'>
-      <Typography variant='h3'>Activities</Typography>
+      <Typography variant='h3' className='mb-4'>
+        Activities
+      </Typography>
       {isSuccess ? (
         <>
           <div className='flex flex-col items-center justify-center gap-y-5 w-full mb-5'>
@@ -27,6 +28,9 @@ export default function Activities({ cardId }) {
               </LLink>
             </div>
           ) : null}
+          <LLink href={`/activities/add?from=card-details&cardId=${cardId}`} className='w-full mb-5 inline-block'>
+            <Button className='w-full'>Add new activity</Button>
+          </LLink>
         </>
       ) : null}
     </div>
