@@ -1,5 +1,6 @@
 'use client'
 
+import BackLink from '@/components/common/rootLayout/BackLink'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
@@ -11,7 +12,7 @@ import { useLoginMutation } from '@/redux/features/authApi'
 import { calculateTokenExpiration } from '@/utils/auth/calculateTokenExpiration'
 import { rtkErrorMesage } from '@/utils/error/errorMessage'
 import { setCookie } from 'cookies-next'
-import { ChevronLeft, Lock, Mail } from 'lucide-react'
+import { Lock, Mail } from 'lucide-react'
 import { useSearchParams } from 'next/navigation'
 import { useEffect, useState } from 'react'
 import { useForm } from 'react-hook-form'
@@ -73,12 +74,7 @@ export default function LoginPage() {
 
   return (
     <div className='py-10 container max-w-md'>
-      <LLink href='/'>
-        <Button variant='icon' className='shadow-sm px-3 h-10 rounded-lg'>
-          <ChevronLeft className='size-6' />
-        </Button>
-      </LLink>
-
+      <BackLink href='/' />
       <Typography variant='h1' className='font-medium pt-20'>
         Login your
       </Typography>

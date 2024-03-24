@@ -22,6 +22,11 @@ export default function AddLinkModal({ platform }) {
     if (isError) toast.error(rtkErrorMesage(error))
   }, [isSuccess, isError, error])
 
+  const addLinkFn = e => {
+    e.preventDefault()
+    addLink({ cardId: getCookie('cardId'), payload: { platform: platform.platform, link } })
+  }
+
   return (
     <Dialog key={platform.id} open={open} onOpenChange={setopen}>
       <DialogTrigger asChild>
@@ -32,32 +37,30 @@ export default function AddLinkModal({ platform }) {
           </Button>
         </div>
       </DialogTrigger>
+
       <DialogContent className='sm:max-w-[425px]'>
-        <DialogHeader>
-          <DialogTitle>Add Link</DialogTitle>
-        </DialogHeader>
-        <div>
-          <div className='flex items-center gap-3 mb-3'>
-            <span>{platform.icon}</span>
-            <span>{platform.platform}</span>
+        <form onSubmit={addLinkFn}>
+          <DialogHeader>
+            <DialogTitle>Add Link</DialogTitle>
+          </DialogHeader>
+          <div>
+            <div className='flex items-center gap-3 mb-3'>
+              <span>{platform.icon}</span>
+              <span>{platform.platform}</span>
+            </div>
+            <SimpleInput
+              value={link}
+              onChange={e => setlink(e.target.value)}
+              placeholder='https://example.com'
+              type='url'
+            />
           </div>
-          <SimpleInput
-            value={link}
-            onChange={e => setlink(e.target.value)}
-            placeholder='https://example.com'
-            type='url'
-          />
-        </div>
-        <DialogFooter>
-          <Button
-            className='rounded-md'
-            onClick={() => {
-              addLink({ cardId: getCookie('cardId'), payload: { platform: platform.platform, link } })
-            }}
-          >
-            Add Link
-          </Button>
-        </DialogFooter>
+          <DialogFooter>
+            <Button className='rounded-md mt-5' type='submit'>
+              Add Link
+            </Button>
+          </DialogFooter>
+        </form>
       </DialogContent>
     </Dialog>
   )
