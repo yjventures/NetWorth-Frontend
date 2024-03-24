@@ -20,9 +20,16 @@ const cardsApi = api.injectEndpoints({
         url: `/user/card/${id}`,
         method: 'PUT',
         body: payload
-      })
+      }),
+      invalidatesTags: ['card', 'cards']
+    }),
+    getAllCards: build.query({
+      query: () => ({
+        url: '/user/card'
+      }),
+      providesTags: ['cards']
     })
   })
 })
 
-export const { useOCRMutation, useCreateEmptyCardMutation, useUpdateCardMutation } = cardsApi
+export const { useOCRMutation, useCreateEmptyCardMutation, useUpdateCardMutation, useGetAllCardsQuery } = cardsApi
