@@ -3,13 +3,15 @@ import Typography from '@/components/ui/typography'
 import CardContactLink from './CardContactLink'
 import CardLink from './CardLink'
 
-export default function CardUserInfo({ data }) {
+export default function CardUserInfo({ data, setFullView }) {
   const webLink = data?.links?.find(l => l.platform === 'Website')?.link
   return (
-    <section className='px-4'>
+    <section className='px-5'>
       <div className='flex items-center justify-between'>
         <Typography variant='h3'>{data?.name}</Typography>
-        <p className='text-primary font-semibold'>Full View</p>
+        <p className='text-primary font-semibold cursor-pointer' onClick={setFullView}>
+          Full View
+        </p>
       </div>
       <p className='text-lg mt-5 mb-4'>{data?.designation}</p>
       <div className='flex items-center gap-3 flex-wrap'>

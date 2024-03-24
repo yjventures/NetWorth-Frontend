@@ -1,31 +1,45 @@
-import cardPlaceholder from '@/assets/images/common/card-placeholder.png'
-import { Img } from '@/components/ui/img'
+import { cn } from '@/lib/utils'
+import { cva } from 'class-variance-authority'
 import { PlusCircle, Share } from 'lucide-react'
 
-export default function CardHeader({ data }) {
+const cardVariants = cva('', {
+  variants: {
+    variant: {
+      linear: 'h-28',
+      curved: 'rounded-ee-2xl rounded-es-2xl h-28',
+      tilted: '-skew-y-[10deg] [&>*]:skew-y-[10deg] h-40 -translate-y-10'
+    }
+  },
+  defaultVariants: {
+    variant: 'linear'
+  }
+})
+
+export default function CardHeader({ data, children }) {
   return (
     <section className='relative'>
       <div
-        className='w-full h-28 flex justify-between items-start p-4 text-white'
+        className={cn(
+          cardVariants({
+            variant: data?.design
+          })
+        )}
         style={{ backgroundColor: data?.color }}
       >
-        <div className='flex items-center gap-2 font-medium text-sm cursor-pointer'>
-          <PlusCircle className='size-5' />
-          <p>Say Something</p>
+        <div
+          className={cn('flex justify-between items-center p-4 text-white absolute w-full', {
+            'top-10': data?.design === 'tilted'
+          })}
+        >
+          <div className='flex items-center gap-2 font-medium text-sm cursor-pointer'>
+            <PlusCircle className='size-5' />
+            <p>Say Something</p>
+          </div>
+          <Share className='size-5 cursor-pointer' />
         </div>
-        <Share className='size-5 cursor-pointer' />
       </div>
       <div className='h-28 bg-white' />
-      <div className='flex items-center justify-between px-5 absolute top-16 left-0 w-full'>
-        {data?.profile_image ? (
-          <Img src={data?.profile_image} alt={data?.name} className='w-32 aspect-square object-cover rounded-full' />
-        ) : (
-          <Img src={cardPlaceholder} alt={data?.name} className='w-32 aspect-square object-cover rounded-full' />
-        )}
-        {data?.company_logo ? (
-          <Img src={data?.company_logo} alt={data?.name} className='w-12 aspect-square object-cover rounded-full' />
-        ) : null}
-      </div>
+      {children}
     </section>
   )
 }

@@ -5,7 +5,7 @@ import { ChevronLeft } from 'lucide-react'
 export default function BackLink({ href }) {
   return (
     <LLink href={href}>
-      <Button variant='icon' className='shadow-sm px-3 h-10 rounded-lg'>
+      <Button variant='icon' className='shadow-sm px-3 h-10 rounded-lg bg-white'>
         <ChevronLeft className='size-6' />
       </Button>
     </LLink>
