@@ -6,6 +6,7 @@ import CardHeader from './CardHeader'
 import CardUserInfo from './CardUserInfo'
 import CondensedHeaderContent from './CondensedHeaderContent'
 import FullviewHeaderContent from './FullviewHeaderContent'
+import FullviewUserInfo from './FullviewUserInfo'
 
 export default function CardDetails({ data, className }) {
   const [view, setview] = useState('condensed')
@@ -23,6 +24,7 @@ export default function CardDetails({ data, className }) {
           <CardHeader data={data}>
             <FullviewHeaderContent data={data} />
           </CardHeader>
+          <FullviewUserInfo data={data} setCondensedView={() => setview('condensed')} />
         </>
       )}
     </section>
