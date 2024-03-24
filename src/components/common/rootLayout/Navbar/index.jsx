@@ -5,7 +5,7 @@ import NavLink from './NavLink'
 
 export default function Navbar() {
   return (
-    <nav className='flex fixed bottom-0 left-0 w-full py-3 bg-white border-t items-center justify-between px-3'>
+    <nav className='flex fixed bottom-0 left-0 w-full py-3 bg-white border-t items-center justify-between px-3 z-40'>
       <NavLink href='/' icon={<Home />} />
       <NavLink href='/inbox' icon={<MessagesSquare />} />
       <div className='p-3 bg-primary rounded-full text-white'>

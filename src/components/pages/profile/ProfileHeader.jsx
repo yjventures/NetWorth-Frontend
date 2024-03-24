@@ -9,7 +9,7 @@ export default function ProfileHeader() {
   const { data, isLoading, isSuccess } = useGetPersonalInfoQuery()
   const userInfo = data?.data?.user.personal_info
   return (
-    <div>
+    <section>
       {isLoading ? (
         <div className='flex flex-col gap-y-3 py-10 items-center justify-center'>
           <Skeleton className='size-32 rounded-full' />
@@ -43,6 +43,6 @@ export default function ProfileHeader() {
           <p className='text-sm text-muted-foreground italic font-medium'>{userInfo?.bio}</p>
         </div>
       ) : null}
-    </div>
+    </section>
   )
 }

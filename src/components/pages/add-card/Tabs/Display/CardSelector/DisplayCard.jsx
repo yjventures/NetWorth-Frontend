@@ -1,7 +1,7 @@
 import { cn } from '@/lib/utils'
 import { cva } from 'class-variance-authority'
 
-const cardVariants = cva('h-1/2', {
+export const cardVariants = cva('h-1/2', {
   variants: {
     variant: {
       linear: '',

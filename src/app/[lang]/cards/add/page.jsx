@@ -5,7 +5,7 @@ import BasicsTab from '@/components/pages/add-card/Tabs/Basics'
 import DisplayTab from '@/components/pages/add-card/Tabs/Display'
 import { Tabs, TabsList, TabsTrigger } from '@/components/ui/tabs'
 import Typography from '@/components/ui/typography'
-import { useUpdatePersoanlInfoMutation } from '@/redux/features/usersApi'
+import { useUpdateCardMutation } from '@/redux/features/cardsApi'
 import { rtkErrorMesage } from '@/utils/error/errorMessage'
 import { getCookie } from 'cookies-next'
 import { X } from 'lucide-react'
@@ -26,7 +26,7 @@ export default function AddCardPage() {
     }
   }, [])
 
-  const [updateCard, { isSuccess, isError, error }] = useUpdatePersoanlInfoMutation()
+  const [updateCard, { isSuccess, isError, error }] = useUpdateCardMutation()
 
   useEffect(() => {
     if (isSuccess) {
