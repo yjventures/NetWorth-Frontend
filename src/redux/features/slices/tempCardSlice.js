@@ -1,25 +1,28 @@
 import { CARD_COLORS } from '@/configs/common'
 import { createSlice } from '@reduxjs/toolkit'
 
+const initialCardDetails = {
+  card_name: '',
+  address: '',
+  design: 'linear',
+  color: CARD_COLORS[0].color,
+  profile_image: '',
+  cover_image: '',
+  name: '',
+  type: 'Public',
+  bio: '',
+  company_name: '',
+  company_logo: '',
+  email: [],
+  phone_number: [],
+  designation: ''
+}
+
 const initialState = {
   cardTexts: [],
   cardId: '',
-  cardDetails: {
-    card_name: '',
-    address: '',
-    design: 'linear',
-    color: CARD_COLORS[0].color,
-    profile_image: '',
-    cover_image: '',
-    name: '',
-    type: 'Public',
-    bio: '',
-    company_name: '',
-    company_logo: '',
-    email: [],
-    phone_number: [],
-    designation: ''
-  }
+  cardDetails: initialCardDetails,
+  updateCardDetails: initialCardDetails
 }
 
 const tempCardSlice = createSlice({
@@ -37,11 +40,15 @@ const tempCardSlice = createSlice({
       state.cardDetails = allDetails
       //localStorage.setItem('cardDetails', JSON.stringify(allDetails))
     },
+    setUpdateCardDetails: (state, action) => {
+      const allDetails = { ...state.updateCardDetails, ...action.payload }
+      state.updateCardDetails = allDetails
+    },
     setCardId: (state, action) => {
       state.cardId = action.payload
     }
   }
 })
 
-export const { setCardTexts, resetCardTexts, setCardDetails, setCardId } = tempCardSlice.actions
+export const { setCardTexts, resetCardTexts, setCardDetails, setUpdateCardDetails, setCardId } = tempCardSlice.actions
 export default tempCardSlice.reducer
