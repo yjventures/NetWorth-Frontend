@@ -7,13 +7,16 @@ import DisplayUpdateTab from '@/components/pages/update-card/DisplayUpdateTab'
 import { Button } from '@/components/ui/button'
 import { Tabs, TabsList, TabsTrigger } from '@/components/ui/tabs'
 import Typography from '@/components/ui/typography'
-import { useGetCardQuery } from '@/redux/features/cardsApi'
+import usePush from '@/hooks/usePush'
+import { useGetCardQuery, useUpdateCardMutation } from '@/redux/features/cardsApi'
 import { setUpdateCardDetails } from '@/redux/features/slices/tempCardSlice'
 import { useParams } from 'next/navigation'
 import { useEffect } from 'react'
-import { useDispatch } from 'react-redux'
+import toast from 'react-hot-toast'
+import { useDispatch, useSelector } from 'react-redux'
 
 export default function EditCardPage() {
+  const push = usePush()
   const dispatch = useDispatch()
   const { id } = useParams()
   const { data, isSuccess } = useGetCardQuery(id)
@@ -24,6 +27,19 @@ export default function EditCardPage() {
     }
   }, [isSuccess, data, dispatch])
 
+  const { updateCardDetails } = useSelector(state => state.tempCard)
+
+  const [updateCard, { isSuccess: isUpdateSuccess, isError, error }] = useUpdateCardMutation()
+
+  useEffect(() => {
+    if (isUpdateSuccess) {
+      toast.success('Card updated successfully!')
+      push(`/cards/${id}`)
+    }
+
+    if (isError) toast.error(rtkErrorMesage(error))
+  }, [isUpdateSuccess, isError, error, id, push])
+
   return (
     <div className='py-10 container max-w-md'>
       <div className='flex items-center justify-between gap-5'>
@@ -31,7 +47,7 @@ export default function EditCardPage() {
         <Typography variant='h3' className='font-medium'>
           Edit card
         </Typography>
-        <Button type='submit' className='h-12 rounded-xl px-8'>
+        <Button className='h-12 rounded-xl px-8' onClick={() => updateCard({ id, payload: updateCardDetails })}>
           Save
         </Button>
       </div>

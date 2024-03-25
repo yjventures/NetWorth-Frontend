@@ -8,7 +8,7 @@ export default function AdvancedTab() {
   return (
     <TabsContent value='advanced'>
       <PortfolioItems cardId={cardId} />
-      <Links />
+      <Links cardId={cardId} />
     </TabsContent>
   )
 }

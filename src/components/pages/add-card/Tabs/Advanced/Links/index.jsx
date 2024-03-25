@@ -4,7 +4,6 @@ import SingleAccordion from '@/components/pages/common/SingleAccordion'
 import { Facebook, Github, Globe, Instagram, Linkedin, Twitter } from 'lucide-react'
 
 import { useGetLinksQuery } from '@/redux/features/linksApi'
-import { getCookie } from 'cookies-next'
 import AddLinkModal from './AddLinkModal'
 import SingleLink from './SingleLink'
 
@@ -17,8 +16,8 @@ export const SOCIAL_PLATFORMS = [
   { id: 6, platform: 'Website', icon: <Globe className='size-4' />, prefilledLink: 'https://' }
 ]
 
-export default function Links() {
-  const { data } = useGetLinksQuery(getCookie('cardId'))
+export default function Links({ cardId, showDeleteButton }) {
+  const { data } = useGetLinksQuery(cardId)
   const availablePlatforms = SOCIAL_PLATFORMS.filter(
     platform => !data?.data?.some(link => link.platform === platform.platform)
   )
@@ -26,12 +25,12 @@ export default function Links() {
     <SingleAccordion value='links' label='Links'>
       {data?.data?.length ? <p className='font-medium'>Added links</p> : null}
       <div className='space-y-3 mt-2 mb-4'>
-        <SingleLink links={data?.data} platform='Facebook' />
-        <SingleLink links={data?.data} platform='Instagram' />
-        <SingleLink links={data?.data} platform='X' />
-        <SingleLink links={data?.data} platform='Github' />
-        <SingleLink links={data?.data} platform='LinkedIn' />
-        <SingleLink links={data?.data} platform='Website' />
+        <SingleLink links={data?.data} platform='Facebook' showDeleteButton={showDeleteButton} />
+        <SingleLink links={data?.data} platform='Instagram' showDeleteButton={showDeleteButton} />
+        <SingleLink links={data?.data} platform='X' showDeleteButton={showDeleteButton} />
+        <SingleLink links={data?.data} platform='Github' showDeleteButton={showDeleteButton} />
+        <SingleLink links={data?.data} platform='LinkedIn' showDeleteButton={showDeleteButton} />
+        <SingleLink links={data?.data} platform='Website' showDeleteButton={showDeleteButton} />
       </div>
       <div className='flex flex-wrap gap-3'>
         {availablePlatforms.map(platform => (
