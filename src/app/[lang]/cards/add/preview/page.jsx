@@ -1,11 +1,8 @@
 'use client'
 
-import AdvancedTab from '@/components/pages/add-card/Tabs/Advanced'
-import BasicsTab from '@/components/pages/add-card/Tabs/Basics'
-import DisplayTab from '@/components/pages/add-card/Tabs/Display'
+import CardPreview from '@/components/pages/card-preview/CardPreview'
 import { Button } from '@/components/ui/button'
 import LLink from '@/components/ui/llink'
-import { Tabs, TabsList, TabsTrigger } from '@/components/ui/tabs'
 import Typography from '@/components/ui/typography'
 import usePush from '@/hooks/usePush'
 import { useUpdateCardMutation } from '@/redux/features/cardsApi'
@@ -16,20 +13,8 @@ import { useEffect } from 'react'
 import toast from 'react-hot-toast'
 import { useSelector } from 'react-redux'
 
-export default function AddCardPage() {
+export default function CardPreviewPage() {
   const push = usePush()
-  // Preventing users from refresing the page
-  useEffect(() => {
-    const handleBeforeUnload = event => {
-      event.preventDefault()
-    }
-
-    window.addEventListener('beforeunload', handleBeforeUnload)
-    return () => {
-      window.removeEventListener('beforeunload', handleBeforeUnload)
-    }
-  }, [])
-
   const [updateCard, { isSuccess, isError, error }] = useUpdateCardMutation()
 
   useEffect(() => {
@@ -41,7 +26,7 @@ export default function AddCardPage() {
     if (isError) toast.error(rtkErrorMesage(error))
   }, [isSuccess, isError, error, push])
 
-  const { cardDetails, cardId } = useSelector(state => state.tempCard)
+  const { cardDetails } = useSelector(state => state.tempCard)
   return (
     <div className='py-10 container overflow-x-hidden max-w-md'>
       <div className='flex items-center justify-between'>
@@ -57,22 +42,11 @@ export default function AddCardPage() {
         </button>
       </div>
 
-      <Tabs defaultValue='display'>
-        <div className='flex justify-center pt-5'>
-          <TabsList>
-            <TabsTrigger value='display'>Display</TabsTrigger>
-            <TabsTrigger value='basics'>Basics</TabsTrigger>
-            <TabsTrigger value='advanced'>Advanced</TabsTrigger>
-          </TabsList>
-        </div>
-        <DisplayTab />
-        <BasicsTab />
-        <AdvancedTab />
-      </Tabs>
+      <CardPreview />
 
-      <LLink href='/cards/add/preview'>
+      <LLink href='/cards/add'>
         <Button className='w-auto fixed bottom-5 left-5 right-5'>
-          <ArrowUp className='size-5 mr-2' /> Preview
+          <ArrowUp className='size-5 mr-2' /> Back to edit
         </Button>
       </LLink>
     </div>

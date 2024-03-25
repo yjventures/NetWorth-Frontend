@@ -8,7 +8,7 @@ export default function BasicsTab() {
   return (
     <TabsContent value='basics'>
       <DrgaggableTextContainer />
-      <div className='max-h-[52dvh] overflow-y-auto mt-5'>
+      <div className='max-h-[50dvh] overflow-y-auto mt-5'>
         <CardNameNType getter='cardDetails' setter={setCardDetails} />
         <DragInputs getter='cardDetails' setter={setCardDetails} />
       </div>
