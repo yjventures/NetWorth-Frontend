@@ -9,9 +9,9 @@ export default function DisplayTab() {
   return (
     <TabsContent value='display'>
       <CardSelector getter='cardDetails' setter={setCardDetails} />
-      <ColorSelector />
-      <ProfileImageUploader />
-      <CoverImageUploader />
+      <ColorSelector getter='cardDetails' setter={setCardDetails} />
+      <ProfileImageUploader getter='cardDetails' setter={setCardDetails} />
+      <CoverImageUploader getter='cardDetails' setter={setCardDetails} />
     </TabsContent>
   )
 }

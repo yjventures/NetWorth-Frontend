@@ -4,14 +4,13 @@ import colorWheel from '@/assets/images/add-card/color-wheel.png'
 import SingleAccordion from '@/components/pages/common/SingleAccordion'
 import { Img } from '@/components/ui/img'
 import { CARD_COLORS } from '@/configs/common'
-import { setCardDetails } from '@/redux/features/slices/tempCardSlice'
 import { useRef } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { ColorButton } from './ColorButton'
 
-export default function ColorSelector() {
+export default function ColorSelector({ getter, setter }) {
   const {
-    cardDetails: { color }
+    [getter]: { color }
   } = useSelector(state => state.tempCard)
   const dispatch = useDispatch()
   const colorWheelRef = useRef(null)
@@ -22,7 +21,7 @@ export default function ColorSelector() {
           type='color'
           value={color}
           onChange={e => {
-            dispatch(setCardDetails({ color: e.target.value }))
+            dispatch(setter({ color: e.target.value }))
           }}
           ref={colorWheelRef}
           className='hidden'
@@ -36,7 +35,7 @@ export default function ColorSelector() {
             outline={col.outline}
             selected={col.color === color}
             onClick={() => {
-              dispatch(setCardDetails({ color: col.color }))
+              dispatch(setter({ color: col.color }))
             }}
           />
         ))}
