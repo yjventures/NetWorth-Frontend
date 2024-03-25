@@ -1,6 +1,7 @@
 import { cn } from '@/lib/utils'
 import { cva } from 'class-variance-authority'
-import { PlusCircle, Share } from 'lucide-react'
+import { Share } from 'lucide-react'
+import AddStatusModal from './AddStatusModal'
 
 const cardVariants = cva('', {
   variants: {
@@ -16,6 +17,7 @@ const cardVariants = cva('', {
 })
 
 export default function CardHeader({ data, hideContent, children }) {
+  console.log(data)
   return (
     <section className='relative'>
       <div
@@ -31,10 +33,7 @@ export default function CardHeader({ data, hideContent, children }) {
             'top-10': data?.design === 'tilted'
           })}
         >
-          <div className={cn('flex items-center gap-2 font-medium text-sm cursor-pointer', { hidden: hideContent })}>
-            <PlusCircle className='size-5' />
-            <p>Say Something</p>
-          </div>
+          <AddStatusModal hideContent={hideContent} cardId={data?._id} status={data?.status} />
           <Share className='size-5 cursor-pointer' />
         </div>
       </div>

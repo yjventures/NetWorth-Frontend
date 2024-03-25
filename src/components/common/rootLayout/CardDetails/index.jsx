@@ -34,9 +34,6 @@ export default function CardDetails({ data, className }) {
 
         <LinksTab cardId={data?._id} />
         <ActivitiesTab cardId={data?._id} />
-        {/* <DisplayUpdateTab />
-        <BasicsUpdateTab />
-        <AdvancedUpdateTab cardId={data?.data?._id} /> */}
       </Tabs>
     </section>
   )
