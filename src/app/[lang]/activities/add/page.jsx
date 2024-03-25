@@ -65,6 +65,8 @@ export default function AddActivityPage() {
         push('/cards/add')
       } else if (from === 'card-details') {
         push(`/cards/${cardId}`)
+      } else if (from === 'edit-card') {
+        push(`/cards/edit/${cardId}`)
       }
     }
     if (isError) toast.error(rtkErrorMesage(error))

@@ -46,7 +46,7 @@ export default function EditCardPage() {
         </div>
         <DisplayUpdateTab />
         <BasicsUpdateTab />
-        <AdvancedUpdateTab />
+        <AdvancedUpdateTab cardId={data?.data?._id} />
       </Tabs>
     </div>
   )

@@ -1,5 +1,10 @@
 import { TabsContent } from '@/components/ui/tabs'
+import PortfolioItems from '../../add-card/Tabs/Advanced/PortfolioItems'
 
-export default function AdvancedUpdateTab() {
-  return <TabsContent value='advanced-update'>Advanced Update Tab</TabsContent>
+export default function AdvancedUpdateTab({ cardId }) {
+  return (
+    <TabsContent value='advanced-update'>
+      <PortfolioItems cardId={cardId} showDeleteButton />
+    </TabsContent>
+  )
 }
