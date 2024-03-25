@@ -19,14 +19,14 @@ export default function CardPreview({ className }) {
     <section className={cn('rounded-2xl overflow-hidden mt-5 bg-white shadow-md', className)}>
       {view === 'condensed' ? (
         <>
-          <CardHeader data={data}>
+          <CardHeader data={data} hideContent>
             <CondensedHeaderContent data={data} />
           </CardHeader>
           <CardUserInfo data={data} setFullView={() => setview('full')} />
         </>
       ) : (
         <>
-          <CardHeader data={data}>
+          <CardHeader data={data} hideContent>
             <FullviewHeaderContent data={data} />
           </CardHeader>
           <FullviewUserInfo data={data} setCondensedView={() => setview('condensed')} />

@@ -15,7 +15,7 @@ const cardVariants = cva('', {
   }
 })
 
-export default function CardHeader({ data, children }) {
+export default function CardHeader({ data, hideContent, children }) {
   return (
     <section className='relative'>
       <div
@@ -31,7 +31,7 @@ export default function CardHeader({ data, children }) {
             'top-10': data?.design === 'tilted'
           })}
         >
-          <div className='flex items-center gap-2 font-medium text-sm cursor-pointer'>
+          <div className={cn('flex items-center gap-2 font-medium text-sm cursor-pointer', { hidden: hideContent })}>
             <PlusCircle className='size-5' />
             <p>Say Something</p>
           </div>

@@ -10,7 +10,7 @@ import { useGetActivitiesQuery } from '@/redux/features/activitiesApi'
 export default function Activities({ cardId }) {
   const { data, isSuccess, isLoading } = useGetActivitiesQuery(cardId)
   return (
-    <div className='px-5'>
+    <div className='px-5 pt-5'>
       <Typography variant='h3' className='mb-4'>
         Activities
       </Typography>
