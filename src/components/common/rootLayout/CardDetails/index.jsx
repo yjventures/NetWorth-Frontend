@@ -9,7 +9,6 @@ import ActivitiesTab from './Tabs/ActivitiesTab'
 import LinksTab from './Tabs/LinksTab'
 
 export default function CardDetails({ data, className }) {
-  console.log(data?.links)
   return (
     <section className={cn('rounded-2xl overflow-hidden mt-5 bg-white shadow-md', className)}>
       <CardHeader data={data}>

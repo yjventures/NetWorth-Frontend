@@ -15,8 +15,14 @@ const linksApi = api.injectEndpoints({
         body: payload
       }),
       invalidatesTags: ['links']
+    }),
+    getMetaData: build.query({
+      query: url => ({
+        url: 'url-metadata',
+        params: { url }
+      })
     })
   })
 })
 
-export const { useGetLinksQuery, useCreateLinkMutation } = linksApi
+export const { useGetLinksQuery, useCreateLinkMutation, useGetMetaDataQuery } = linksApi
