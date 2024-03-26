@@ -21,8 +21,15 @@ const linksApi = api.injectEndpoints({
         url: 'url-metadata',
         params: { url }
       })
+    }),
+    deleteLink: build.mutation({
+      query: linkId => ({
+        url: `/user/link/${linkId}`,
+        method: 'DELETE'
+      }),
+      invalidatesTags: ['links']
     })
   })
 })
 
-export const { useGetLinksQuery, useCreateLinkMutation, useGetMetaDataQuery } = linksApi
+export const { useGetLinksQuery, useCreateLinkMutation, useGetMetaDataQuery, useDeleteLinkMutation } = linksApi
