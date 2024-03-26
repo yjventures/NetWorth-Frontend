@@ -15,8 +15,15 @@ const activitiesApi = api.injectEndpoints({
         body: payload
       }),
       invalidatesTags: ['activities']
+    }),
+    deleteActivity: build.mutation({
+      query: activityId => ({
+        url: `/user/activity/${activityId}`,
+        method: 'DELETE'
+      }),
+      invalidatesTags: ['activities']
     })
   })
 })
 
-export const { useGetActivitiesQuery, useCreateActivityMutation } = activitiesApi
+export const { useGetActivitiesQuery, useCreateActivityMutation, useDeleteActivityMutation } = activitiesApi
