@@ -12,7 +12,7 @@ import {
 } from '@/components/ui/dialog'
 import { SimpleTextarea } from '@/components/ui/simple-textarea'
 import { cn } from '@/lib/utils'
-import { useUpdateCardStatusMutation } from '@/redux/features/linksApi'
+import { useUpdateCardStatusMutation } from '@/redux/features/cardsApi'
 import { rtkErrorMesage } from '@/utils/error/errorMessage'
 import { PencilLine, PlusCircle } from 'lucide-react'
 import { useEffect, useState } from 'react'

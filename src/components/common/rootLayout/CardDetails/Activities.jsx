@@ -29,15 +29,10 @@ export default function Activities({ cardId }) {
             ))}
           </div>
           {!data?.data?.length ? (
-            <div className='mb-5'>
-              <p className='italic text-muted-foreground mb-5 text-sm'>No activity added yet</p>
-              <LLink href={`/activities/add?from=card-details&cardId=${cardId}`} className='w-full'>
-                <Button className='w-full'>Add new activity</Button>
-              </LLink>
-            </div>
+            <p className='italic text-muted-foreground mb-5 text-sm'>No activity added yet</p>
           ) : null}
           <LLink href={`/activities/add?from=card-details&cardId=${cardId}`} className='w-full mb-5 inline-block'>
-            <Button className='w-full'>Add new activity</Button>
+            <Button className='w-full'>Add new portfolio</Button>
           </LLink>
         </>
       ) : null}

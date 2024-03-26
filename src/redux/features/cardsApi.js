@@ -23,6 +23,14 @@ const cardsApi = api.injectEndpoints({
       }),
       invalidatesTags: ['card', 'cards']
     }),
+    updateCardStatus: build.mutation({
+      query: ({ cardId, payload }) => ({
+        url: `/user/card-status/${cardId}`,
+        method: 'PUT',
+        body: { status: payload }
+      }),
+      invalidatesTags: ['card']
+    }),
     getAllCards: build.query({
       query: () => ({
         url: '/user/card'
@@ -51,5 +59,6 @@ export const {
   useUpdateCardMutation,
   useGetAllCardsQuery,
   useGetCardQuery,
-  useDeleteCardMutation
+  useDeleteCardMutation,
+  useUpdateCardStatusMutation
 } = cardsApi

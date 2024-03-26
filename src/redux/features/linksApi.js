@@ -21,16 +21,8 @@ const linksApi = api.injectEndpoints({
         url: 'url-metadata',
         params: { url }
       })
-    }),
-    updateCardStatus: build.mutation({
-      query: ({ cardId, payload }) => ({
-        url: `/user/card-status/${cardId}`,
-        method: 'PUT',
-        body: payload
-      }),
-      invalidatesTags: ['card']
     })
   })
 })
 
-export const { useGetLinksQuery, useCreateLinkMutation, useGetMetaDataQuery, useUpdateCardStatusMutation } = linksApi
+export const { useGetLinksQuery, useCreateLinkMutation, useGetMetaDataQuery } = linksApi
