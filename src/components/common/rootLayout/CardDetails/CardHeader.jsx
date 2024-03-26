@@ -17,7 +17,6 @@ const cardVariants = cva('', {
 })
 
 export default function CardHeader({ data, hideContent, children }) {
-  console.log(data)
   return (
     <section className='relative'>
       <div

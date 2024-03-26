@@ -34,6 +34,13 @@ const cardsApi = api.injectEndpoints({
         url: `/user/card/${id}`
       }),
       providesTags: ['card']
+    }),
+    deleteCard: build.mutation({
+      query: id => ({
+        url: `/user/card/${id}`,
+        method: 'DELETE'
+      }),
+      providesTags: ['cards']
     })
   })
 })
@@ -43,5 +50,6 @@ export const {
   useCreateEmptyCardMutation,
   useUpdateCardMutation,
   useGetAllCardsQuery,
-  useGetCardQuery
+  useGetCardQuery,
+  useDeleteCardMutation
 } = cardsApi
