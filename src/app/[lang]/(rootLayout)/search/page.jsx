@@ -3,10 +3,13 @@
 import BackLink from '@/components/common/rootLayout/BackLink'
 import SearchFilters from '@/components/pages/search/SearchFilters'
 import { SimpleInput } from '@/components/ui/simple-input'
+import { Skeleton } from '@/components/ui/skeleton'
 import Typography from '@/components/ui/typography'
 import useDebounce from '@/hooks/useDebounce'
+import { useSearchContactsQuery } from '@/redux/features/contactsApi'
 import { Search } from 'lucide-react'
 import { useState } from 'react'
+import SearchCard from './SearchCard'
 
 export default function SearchPage() {
   const initialSearchParams = {
@@ -24,6 +27,8 @@ export default function SearchPage() {
 
   const allFilters = { search, country, city, designation }
 
+  const { data, isSuccess, isFetching } = useSearchContactsQuery(allFilters)
+
   return (
     <div className='py-10 container'>
       <div className='flex items-center gap-3 justify-between'>
@@ -33,7 +38,6 @@ export default function SearchPage() {
             Search
           </Typography>
         </div>
-
         <SearchFilters params={params} setparams={setparams} />
       </div>
       <SimpleInput
@@ -44,6 +48,24 @@ export default function SearchPage() {
         iconPosition='right'
         className='mt-5'
       />
+
+      {isFetching ? (
+        <div className='grid grid-cols-2 gap-5 pt-6'>
+          {[
+            ...Array(6)
+              .fill()
+              .map((_, i) => <Skeleton key={i} className='w-full h-64' />)
+          ]}
+        </div>
+      ) : null}
+
+      {isSuccess ? (
+        <div className='grid grid-cols-2 gap-5 pt-6'>
+          {data?.data?.map(card => (
+            <SearchCard key={card?._id} card={card} />
+          ))}
+        </div>
+      ) : null}
     </div>
   )
 }

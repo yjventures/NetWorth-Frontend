@@ -16,7 +16,7 @@ export default function Activities({ cardId }) {
       </Typography>
       {isLoading ? (
         <div className='space-y-5'>
-          {[...Array(5).fill()].map(i => (
+          {[...Array(5).fill()].map((_, i) => (
             <Skeleton key={i} className='w-full h-40 rounded-xl' />
           ))}
         </div>

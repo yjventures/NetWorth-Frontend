@@ -14,7 +14,7 @@ export default function ProfileCards() {
 
       {isLoading ? (
         <div className='grid grid-cols-2 gap-6 mt-5'>
-          {[...Array(6).keys()].map(i => (
+          {[...Array(6).keys()].map((_, i) => (
             <Skeleton key={i} className='w-full h-40' />
           ))}
         </div>

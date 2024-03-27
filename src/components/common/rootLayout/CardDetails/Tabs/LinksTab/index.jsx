@@ -12,7 +12,7 @@ export default function LinksTab({ cardId }) {
           {[
             ...Array(5)
               .fill()
-              .map(i => <Skeleton key={i} className='w-full h-40' />)
+              .map((_, i) => <Skeleton key={i} className='w-full h-40' />)
           ]}
         </div>
       ) : null}
