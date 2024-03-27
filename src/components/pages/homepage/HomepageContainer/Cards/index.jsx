@@ -3,19 +3,23 @@
 import { Skeleton } from '@/components/ui/skeleton'
 import { cn } from '@/lib/utils'
 import { useGetAllCardsQuery } from '@/redux/features/cardsApi'
+import { setSelectedCard } from '@/redux/features/slices/cardSlice'
 import styles from '@/styles/pages/homepage.module.scss'
 import { useEffect } from 'react'
+import { useDispatch } from 'react-redux'
 import Card from './Card'
 
-export default function Cards({ selectedCard, setselectedCard }) {
+export default function Cards() {
   const { isLoading, isSuccess, data } = useGetAllCardsQuery()
   const cards = data?.data?.cards
 
+  const dispatch = useDispatch()
+
   useEffect(() => {
     if (isSuccess) {
-      setselectedCard(cards?.[0]?._id)
+      dispatch(setSelectedCard(cards?.[0]?._id))
     }
-  }, [cards, isSuccess, setselectedCard])
+  }, [cards, isSuccess, dispatch])
 
   return (
     <section className='py-5'>
@@ -33,7 +37,7 @@ export default function Cards({ selectedCard, setselectedCard }) {
         {isSuccess ? (
           <>
             {cards?.map(card => (
-              <Card key={card?._id} selectedCard={selectedCard} setselectedCard={setselectedCard} card={card} />
+              <Card key={card?._id} card={card} />
             ))}
           </>
         ) : null}
