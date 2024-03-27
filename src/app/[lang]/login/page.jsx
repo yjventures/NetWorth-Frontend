@@ -46,7 +46,7 @@ export default function LoginPage() {
       if (data?.status) {
         toast.success('Logged in successfully!')
         const { accessToken, refreshToken, data: userData } = { ...data }
-        if (rememberMe === 'true') {
+        if (rememberMe) {
           setCookie('refreshToken', refreshToken, { maxAge: calculateTokenExpiration(refreshToken) })
           setCookie('accessToken', accessToken, { maxAge: calculateTokenExpiration(accessToken) })
           setCookie('userData', JSON.stringify(userData), {
@@ -58,7 +58,7 @@ export default function LoginPage() {
           setCookie('userData', JSON.stringify(userData))
         }
 
-        if (userData?.personal_info?.bio) {
+        if (userData?.is_completed_personal_info) {
           if (userData?.cards?.length) {
             push('/')
           } else {
