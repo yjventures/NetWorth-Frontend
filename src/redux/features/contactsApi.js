@@ -27,6 +27,30 @@ const contactsApi = api.injectEndpoints({
         url: `/card/${cardId}/outgoing-request`
       }),
       providesTags: ['outgoingRequests']
+    }),
+    acceptIncomingRequest: build.mutation({
+      query: payload => ({
+        url: `/card/accept-request`,
+        method: 'PUT',
+        body: payload
+      }),
+      invalidatesTags: ['incomingRequests']
+    }),
+    cancelIncomingRequest: build.mutation({
+      query: payload => ({
+        url: `/card/cancel-incoming-request`,
+        method: 'PUT',
+        body: payload
+      }),
+      invalidatesTags: ['incomingRequests']
+    }),
+    cancelOutgoingRequest: build.mutation({
+      query: payload => ({
+        url: `/card/cancel-outgoing-request`,
+        method: 'PUT',
+        body: payload
+      }),
+      invalidatesTags: ['outgoingRequests']
     })
   })
 })
@@ -35,5 +59,8 @@ export const {
   useSearchContactsQuery,
   useSendRequestMutation,
   useGetIncomingRequestsQuery,
-  useGetOutgoingRequestsQuery
+  useGetOutgoingRequestsQuery,
+  useAcceptIncomingRequestMutation,
+  useCancelIncomingRequestMutation,
+  useCancelOutgoingRequestMutation
 } = contactsApi
