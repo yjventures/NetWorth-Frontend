@@ -15,8 +15,25 @@ const contactsApi = api.injectEndpoints({
         body: payload
       }),
       invalidatesTags: ['outgoingRequests']
+    }),
+    getIncomingRequests: build.query({
+      query: cardId => ({
+        url: `/card/${cardId}/incoming-request`
+      }),
+      providesTags: ['incomingRequests']
+    }),
+    getOutgoingRequests: build.query({
+      query: cardId => ({
+        url: `/card/${cardId}/outgoing-request`
+      }),
+      providesTags: ['outgoingRequests']
     })
   })
 })
 
-export const { useSearchContactsQuery, useSendRequestMutation } = contactsApi
+export const {
+  useSearchContactsQuery,
+  useSendRequestMutation,
+  useGetIncomingRequestsQuery,
+  useGetOutgoingRequestsQuery
+} = contactsApi

@@ -1,6 +1,7 @@
 'use client'
 
 import BackLink from '@/components/common/rootLayout/BackLink'
+import SearchCard from '@/components/pages/search/SearchCard'
 import SearchFilters from '@/components/pages/search/SearchFilters'
 import { SimpleInput } from '@/components/ui/simple-input'
 import { Skeleton } from '@/components/ui/skeleton'
@@ -9,7 +10,6 @@ import useDebounce from '@/hooks/useDebounce'
 import { useSearchContactsQuery } from '@/redux/features/contactsApi'
 import { Search } from 'lucide-react'
 import { useState } from 'react'
-import SearchCard from './SearchCard'
 
 export default function SearchPage() {
   const initialSearchParams = {

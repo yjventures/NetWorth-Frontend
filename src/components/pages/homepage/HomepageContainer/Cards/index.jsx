@@ -2,25 +2,10 @@
 
 import { Skeleton } from '@/components/ui/skeleton'
 import { cn } from '@/lib/utils'
-import { useGetAllCardsQuery } from '@/redux/features/cardsApi'
-import { setSelectedCard } from '@/redux/features/slices/cardSlice'
 import styles from '@/styles/pages/homepage.module.scss'
-import { useEffect } from 'react'
-import { useDispatch } from 'react-redux'
 import Card from './Card'
 
-export default function Cards() {
-  const { isLoading, isSuccess, data } = useGetAllCardsQuery()
-  const cards = data?.data?.cards
-
-  const dispatch = useDispatch()
-
-  useEffect(() => {
-    if (isSuccess) {
-      dispatch(setSelectedCard(cards?.[0]?._id))
-    }
-  }, [cards, isSuccess, dispatch])
-
+export default function Cards({ isLoading, isSuccess, cards }) {
   return (
     <section className='py-5'>
       <p className='text-sm font-medium'>Your Cards</p>
