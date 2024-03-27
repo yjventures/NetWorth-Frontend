@@ -11,9 +11,11 @@ import LLink from '@/components/ui/llink'
 import { Textarea } from '@/components/ui/textarea'
 import Typography from '@/components/ui/typography'
 import usePush from '@/hooks/usePush'
+import { useCreateEmptyCardMutation } from '@/redux/features/cardsApi'
 import { useGetPersonalInfoQuery, useUpdatePersoanlInfoMutation } from '@/redux/features/usersApi'
 import { setMaxDate } from '@/utils/date/setMaxDate'
 import { rtkErrorMesage } from '@/utils/error/errorMessage'
+import { setCookie } from 'cookies-next'
 import { ChevronLeft, FilePenLine, PlusCircle } from 'lucide-react'
 import { useEffect, useState } from 'react'
 import { useForm } from 'react-hook-form'
@@ -55,7 +57,11 @@ export default function PersonalInfoPage() {
   const [showPrompt, setshowPrompt] = useState(false)
 
   const onSubmit = data => {
-    const allData = { ...data, profile_image, phone_number: phone_number ? `+${phone_number}` : '' }
+    const allData = {
+      ...data,
+      profile_image,
+      phone_number: phone_number.includes('+') ? phone_number : `+${phone_number}`
+    }
     updateProfile(allData)
   }
 
@@ -73,6 +79,18 @@ export default function PersonalInfoPage() {
     }
     if (isError) toast.error(rtkErrorMesage(error))
   }, [isSuccess, isError, error])
+
+  const [createEmptyCard, { isSuccess: isCardSuccess, data: cardData, isError: isCardError, error: cardError }] =
+    useCreateEmptyCardMutation()
+
+  useEffect(() => {
+    if (isCardSuccess) {
+      toast.success('Card intialization successfull!')
+      push('/cards/add')
+      setCookie('cardId', cardData?.data?._id)
+    }
+    if (isCardError) toast.error(rtkErrorMesage(cardError))
+  }, [isCardSuccess, isCardError, cardError, push])
 
   return (
     <div suppressHydrationWarning>
@@ -147,7 +165,7 @@ export default function PersonalInfoPage() {
         title='Do you want to use the previously scanned card to add a card?'
         open={showPrompt}
         setopen={setshowPrompt}
-        cb={() => push('/cards/add')}
+        cb={() => createEmptyCard()}
         rejectionCb={() => setopen(true)}
       />
     </div>

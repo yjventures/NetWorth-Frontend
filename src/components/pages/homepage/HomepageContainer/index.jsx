@@ -1,6 +1,7 @@
 'use client'
 
 import Navbar from '@/components/common/rootLayout/Navbar'
+import LLink from '@/components/ui/llink'
 import { Bell, Search } from 'lucide-react'
 import Cards from './Cards'
 
@@ -11,7 +12,9 @@ export default function HomepageContainer() {
         <p className='text-xl font-semibold tracking-[5px] uppercase'>Networth</p>
         <div className='flex gap-4'>
           <Bell />
-          <Search />
+          <LLink href='/search'>
+            <Search />
+          </LLink>
         </div>
       </nav>
 
