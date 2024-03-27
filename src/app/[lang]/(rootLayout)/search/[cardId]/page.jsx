@@ -9,9 +9,11 @@ import Typography from '@/components/ui/typography'
 import useDebounce from '@/hooks/useDebounce'
 import { useSearchContactsQuery } from '@/redux/features/contactsApi'
 import { Search } from 'lucide-react'
+import { useParams } from 'next/navigation'
 import { useState } from 'react'
 
 export default function SearchPage() {
+  const { cardId } = useParams()
   const initialSearchParams = {
     search: '',
     country: '',
@@ -62,7 +64,7 @@ export default function SearchPage() {
       {isSuccess ? (
         <div className='grid grid-cols-2 gap-5 pt-6'>
           {data?.data?.map(card => (
-            <SearchCard key={card?._id} card={card} />
+            <SearchCard key={card?._id} card={card} cardId={cardId} />
           ))}
         </div>
       ) : null}

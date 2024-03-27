@@ -10,7 +10,7 @@ const contactsApi = api.injectEndpoints({
     }),
     sendRequest: build.mutation({
       query: payload => ({
-        url: '/user/send-request',
+        url: '/card/send-request',
         method: 'PUT',
         body: payload
       }),

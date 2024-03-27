@@ -7,15 +7,12 @@ import { useSendRequestMutation } from '@/redux/features/contactsApi'
 import { rtkErrorMesage } from '@/utils/error/errorMessage'
 import { useEffect } from 'react'
 import toast from 'react-hot-toast'
-import { useSelector } from 'react-redux'
 
-export default function SearchCard({ card }) {
+export default function SearchCard({ card, cardId }) {
   const [sendRequest, { isSuccess, isError, error }] = useSendRequestMutation()
 
-  const { selectedCard } = useSelector(state => state.card)
-
   const sendRequestFn = () => {
-    sendRequest({ sender_id: selectedCard, recipient_id: card?._id })
+    sendRequest({ sender_id: cardId, recipient_id: card?._id })
   }
 
   useEffect(() => {
