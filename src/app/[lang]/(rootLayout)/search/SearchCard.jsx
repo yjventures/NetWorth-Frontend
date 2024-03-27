@@ -1,9 +1,28 @@
+'use client'
+
 import cardPlaceholder from '@/assets/images/common/card-placeholder.png'
 import coverPlaceholder from '@/assets/images/common/cover-placeholder.png'
 import { Img } from '@/components/ui/img'
+import { useSendRequestMutation } from '@/redux/features/contactsApi'
+import { rtkErrorMesage } from '@/utils/error/errorMessage'
+import { useEffect } from 'react'
+import toast from 'react-hot-toast'
+import { useSelector } from 'react-redux'
 
 export default function SearchCard({ card }) {
-  console.log(card)
+  const [sendRequest, { isSuccess, isError, error }] = useSendRequestMutation()
+
+  const { selectedCard } = useSelector(state => state.card)
+
+  const sendRequestFn = () => {
+    sendRequest({ sender_id: selectedCard, recipient_id: card?._id })
+  }
+
+  useEffect(() => {
+    if (isSuccess) toast.success('Sent connection requst successfully!')
+    if (isError) toast.error(rtkErrorMesage(error))
+  }, [isSuccess, isError, error])
+
   return (
     <div className='rounded-lg overflow-hidden relative border shadow-md'>
       {card?.cover_image ? (
@@ -33,7 +52,10 @@ export default function SearchCard({ card }) {
           <p className='text-xs font-light text-muted-foreground'>{card?.address}</p>
         </div>
 
-        <button className='w-full rounded-full bg-transparent text-primary border-primary border py-1 text-sm font-medium'>
+        <button
+          className='w-full rounded-full bg-transparent text-primary border-primary border py-1 text-sm font-medium'
+          onClick={sendRequestFn}
+        >
           Connect
         </button>
       </div>

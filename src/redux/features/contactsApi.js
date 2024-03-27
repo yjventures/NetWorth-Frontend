@@ -4,11 +4,19 @@ const contactsApi = api.injectEndpoints({
   endpoints: build => ({
     searchContacts: build.query({
       query: params => ({
-        url: 'search',
+        url: '/search',
         params
       })
+    }),
+    sendRequest: build.mutation({
+      query: payload => ({
+        url: '/user/send-request',
+        method: 'PUT',
+        body: payload
+      }),
+      invalidatesTags: ['outgoingRequests']
     })
   })
 })
 
-export const { useSearchContactsQuery } = contactsApi
+export const { useSearchContactsQuery, useSendRequestMutation } = contactsApi
