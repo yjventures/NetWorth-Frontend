@@ -1,7 +1,7 @@
 'use client'
 
 import BackLink from '@/components/common/rootLayout/BackLink'
-import IncomingReqeustCard from '@/components/pages/requests/incoming/IncomingReqeustCard'
+import OutgoingReqeustCard from '@/components/pages/requests/outgoing/OutgoingRequestCard'
 import { Skeleton } from '@/components/ui/skeleton'
 import Typography from '@/components/ui/typography'
 import { useGetOutgoingRequestsQuery } from '@/redux/features/contactsApi'
@@ -37,7 +37,7 @@ export default function OutgoingRequestsPage() {
       {isSuccess ? (
         <div className='grid grid-cols-2 gap-5 pt-6'>
           {data?.data?.outgoing_friend_request?.map(card => (
-            <IncomingReqeustCard key={card?._id} card={card} cardId={cardId} />
+            <OutgoingReqeustCard key={card?._id} card={card} cardId={cardId} />
           ))}
         </div>
       ) : null}
