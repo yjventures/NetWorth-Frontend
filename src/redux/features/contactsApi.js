@@ -51,6 +51,11 @@ const contactsApi = api.injectEndpoints({
         body: payload
       }),
       invalidatesTags: ['outgoingRequests']
+    }),
+    getConnectionsList: build.query({
+      query: cardId => ({
+        url: `/card/${cardId}/friend-list`
+      })
     })
   })
 })
@@ -62,5 +67,6 @@ export const {
   useGetOutgoingRequestsQuery,
   useAcceptIncomingRequestMutation,
   useCancelIncomingRequestMutation,
-  useCancelOutgoingRequestMutation
+  useCancelOutgoingRequestMutation,
+  useGetConnectionsListQuery
 } = contactsApi

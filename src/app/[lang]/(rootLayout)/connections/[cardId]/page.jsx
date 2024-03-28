@@ -1,14 +1,17 @@
 'use client'
 
 import BackLink from '@/components/common/rootLayout/BackLink'
+import SwipeableCard from '@/components/pages/connections/SwipeableCard'
 import { Button } from '@/components/ui/button'
 import LLink from '@/components/ui/llink'
 import Typography from '@/components/ui/typography'
+import { useGetConnectionsListQuery } from '@/redux/features/contactsApi'
 import { Search } from 'lucide-react'
 import { useParams } from 'next/navigation'
 
 export default function Connectionspage() {
   const { cardId } = useParams()
+  const { data } = useGetConnectionsListQuery(cardId)
   return (
     <section className='py-10 container'>
       <div className='flex gap-3 items-center justify-between'>
@@ -33,6 +36,12 @@ export default function Connectionspage() {
             Outgoing requests
           </Button>
         </LLink>
+      </div>
+
+      <div className='space-y-4'>
+        {data?.data?.map(connection => (
+          <SwipeableCard connection={connection} key={connection?._id} />
+        ))}
       </div>
     </section>
   )

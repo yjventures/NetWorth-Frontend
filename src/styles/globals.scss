@@ -48,3 +48,32 @@
     --ring: 224.3 76.3% 48%;
   }
 }
+
+/* SwipeableComponent.css */
+
+.swipeableContainer {
+  position: relative;
+  overflow: hidden;
+}
+
+.menu {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  background: #f0f0f0;
+  transition: transform 0.3s ease-in-out;
+  z-index: 1;
+  padding: 10px;
+}
+
+.swipeableComponent {
+  margin-left: auto;
+  position: relative;
+  background-color: #ddd;
+  padding: 20px;
+  text-align: center;
+  z-index: 50;
+  isolation: isolate;
+  transition: transform 0.3s ease-in-out;
+}

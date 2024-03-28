@@ -26,9 +26,7 @@ export default function Feed() {
               <PortfolioItem key={activity?._id} activity={activity} />
             ))}
           </div>
-          {!data?.data?.length ? (
-            <p className='italic text-muted-foreground mb-5 text-sm'>No portfolio added yet</p>
-          ) : null}
+          {!data?.data?.length ? <p className='italic text-muted-foreground mb-5 text-sm'>No portfolio found</p> : null}
         </>
       ) : null}
     </section>
