@@ -1,3 +1,4 @@
+import usePush from '@/hooks/usePush'
 import { cn } from '@/lib/utils'
 import { cva } from 'class-variance-authority'
 import { Share } from 'lucide-react'
@@ -17,6 +18,7 @@ const cardVariants = cva('', {
 })
 
 export default function CardHeader({ data, hideContent, children }) {
+  const push = usePush()
   return (
     <section className='relative'>
       <div
@@ -33,10 +35,10 @@ export default function CardHeader({ data, hideContent, children }) {
           })}
         >
           <AddStatusModal hideContent={hideContent} cardId={data?._id} status={data?.status} />
-          <Share className='size-5 cursor-pointer' />
+          <Share className='size-5 cursor-pointer' onClick={() => push(`/cards/share/${data?._id}`)} />
         </div>
       </div>
-      <div className='h-28 bg-white' />
+      <div className={cn('h-28 bg-white', { 'h-20': data?.design === 'tilted' })} />
       {children}
     </section>
   )

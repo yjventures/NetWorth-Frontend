@@ -1,3 +1,5 @@
+import cardPlaceholder from '@/assets/images/common/card-placeholder.png'
+import { Img } from '@/components/ui/img'
 import { CalendarDays, MessagesSquare, Trash2 } from 'lucide-react'
 import { useState } from 'react'
 
@@ -65,8 +67,16 @@ const SwipeableCard = ({ connection }) => {
         onTouchEnd={onTouchEnd}
         style={{ transform: `translateX(${isDragging ? currentX : translateX}px)` }}
       >
-        <div className='size-12 bg-red-300 rounded-md' />
-        <div className='space-y-1'>
+        {connection?.profile_image ? (
+          <Img
+            src={connection?.profile_image}
+            alt={connection?.name}
+            className='w-14 aspect-square object-cover rounded-md'
+          />
+        ) : (
+          <Img src={cardPlaceholder} alt={connection?.name} className='w-14 aspect-square object-cover rounded-md' />
+        )}
+        <div className='space-y-1.5'>
           <p className='text-sm font-medium'>{connection?.name}</p>
           <p className='text-xs font-medium'>
             {connection?.designation} @ {connection?.company_name}
