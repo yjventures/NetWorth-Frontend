@@ -7,6 +7,7 @@ import { setSelectedCard } from '@/redux/features/slices/cardSlice'
 import { Bell, Search } from 'lucide-react'
 import { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
+import Feed from '../Feed'
 import Cards from './Cards'
 
 export default function HomepageContainer() {
@@ -36,6 +37,7 @@ export default function HomepageContainer() {
       </nav>
 
       <Cards cards={cards} isLoading={isLoading} isSuccess={isSuccess} />
+      <Feed />
 
       <Navbar />
     </div>

@@ -49,6 +49,11 @@ const cardsApi = api.injectEndpoints({
         method: 'DELETE'
       }),
       providesTags: ['cards']
+    }),
+    getFeed: build.query({
+      query: cardId => ({
+        url: `/card/${cardId}/feed`
+      })
     })
   })
 })
@@ -60,5 +65,6 @@ export const {
   useGetAllCardsQuery,
   useGetCardQuery,
   useDeleteCardMutation,
-  useUpdateCardStatusMutation
+  useUpdateCardStatusMutation,
+  useGetFeedQuery
 } = cardsApi
