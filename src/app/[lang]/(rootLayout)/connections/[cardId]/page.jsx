@@ -22,14 +22,14 @@ export default function Connectionspage() {
         <Search />
       </div>
 
-      <div className='flex items-center justify-between py-5 gap-4'>
+      <div className='flex items-center justify-between py-5 gap-3'>
         <LLink href={`/connections/incoming/${cardId}`}>
-          <Button variant='default' className='rounded-lg h-12 px-2'>
+          <Button variant='default' className='rounded-xl h-11'>
             Incoming requests
           </Button>
         </LLink>
         <LLink href={`/connections/outgoing/${cardId}`}>
-          <Button variant='tartiary' className='rounded-lg h-12 px-2'>
+          <Button variant='tartiary' className='rounded-xl h-11'>
             Outgoing requests
           </Button>
         </LLink>
